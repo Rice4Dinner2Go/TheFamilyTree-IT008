@@ -2,13 +2,13 @@
 <html>
 <head>
     <title>Family Tree</title>
+    <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/canvas.css">
-    <link rel="stylesheet" href="style/style.css"?
 </head>
 <body>
     <div class="canvas-container">
         <div class="draggable-canvas">
-            <!-- Viết html từ đây -->
+            <!-- Những gì viết trong đây khi kéo thả nền thì sẽ đi theo -->
             <h1 style="position: absolute; left: 1500px; top: 600px;">
                 Test
             </h1>
@@ -20,6 +20,9 @@
             <!-- Hết -->
         </div>
     </div>
+    
+    <!-- Những gì viết trong đây thì sẽ không đi theo khi kéo thả nền -->
+    <h1 style="position: fixed; left: 700px; top: 100px;">Family Tree</h1>
 
     <script src="script/canvas.js"></script>
 </body>
