@@ -1,0 +1,9 @@
+Important:
+- Cố gắng dùng framework nào mà không phải sửa lại code đã viết
+
+Notes:
+1/ Tạo branch mới rồi merge vào branch dev chờ test
+2/ Viếts mô tả sơ sơ khi merge request, commit
+3/ Khi viết code nếu đc thì comment, comment cả file nếu file ít dùng tới, comment riêng từng function nếu hay dùng function đó
+4/ Mỗi chức năng 1 file .js với 1 file .css riêng (Code theo hướng Module)
+ 
