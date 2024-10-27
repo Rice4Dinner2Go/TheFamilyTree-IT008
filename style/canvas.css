@@ -1,0 +1,33 @@
+/* 
+Cả cái chương trình này dùng để vẽ cái background mà nó di chuyển đc
+Đi cùng với canvas.js 
+*/
+
+
+.canvas-container {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: white;
+    position: relative;
+}
+
+.draggable-canvas {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background-image: 
+        linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+        linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+    background-size: 20px 20px;
+    cursor: move;
+    touch-action: none;
+}
+
+.draggable-canvas.dragging {
+    background-image: 
+        linear-gradient(to right, #e0e0e0 1px, transparent 1px),
+        linear-gradient(to bottom, #e0e0e0 1px, transparent 1px);
+}
