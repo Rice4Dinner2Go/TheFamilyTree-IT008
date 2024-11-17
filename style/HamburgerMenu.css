@@ -1,0 +1,69 @@
+.sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    height: 100%;
+    width: 250px;
+    background: rgb(126, 198, 190);
+    transition: 0.4s;
+    padding-top: 60px;
+    z-index: 99;
+}
+
+.hamburger {
+    position: absolute;
+    top: 50%;
+    right: -65px; /* Position it outside the sidebar */
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 100;
+    padding: 10px;
+    background: rgb(126, 198, 190);
+    border-radius: 5px;
+}
+
+.hamburger div {
+    width: 40px;
+    height: 5px;
+    border-radius: 5px;
+    background: #333;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar a {
+    display: block;
+    color: black;
+    font-weight: bolder;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 16px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background: rgb(107, 164, 175);
+}
+
+/* Hamburger animation */
+.hamburger.active div:nth-child(1) {
+    transform: rotate(-45deg) translate(-6px, 9px);
+}
+
+.hamburger.active div:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active div:nth-child(3) {
+    transform: rotate(45deg) translate(-6px, -9px);
+}
+
+.content {
+    padding: 20px;
+    margin-left: 60px;
+}
