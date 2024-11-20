@@ -62,7 +62,7 @@ h1 {
     border-color: rgb(126, 198, 190);
 }
 
-/* Popup Form Styles */
+/* Form popup khi user chọn make a new tree */
 .popup-overlay {
     display: none;
     position: fixed;
@@ -128,7 +128,7 @@ h1 {
 .form-buttons button {
     flex: 1;
     padding: 0.8rem;
-    border: none;
+    border: 2px solid transparent;
     border-radius: 8px;
     font-size: 1rem;
     cursor: pointer;
