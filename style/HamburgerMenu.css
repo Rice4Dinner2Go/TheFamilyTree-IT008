@@ -52,7 +52,7 @@
 
 /* Hamburger animation */
 .hamburger.active div:nth-child(1) {
-    transform: rotate(-45deg) translate(-6px, 9px);
+    transform: rotate(-45deg) translate(-8px, 8px);
 }
 
 .hamburger.active div:nth-child(2) {
@@ -60,7 +60,7 @@
 }
 
 .hamburger.active div:nth-child(3) {
-    transform: rotate(45deg) translate(-6px, -9px);
+    transform: rotate(45deg) translate(-8px, -8px);
 }
 
 .content {
