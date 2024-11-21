@@ -1,50 +1,73 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Family Tree</title>
-    <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/canvas.css">
-    <link rel="stylesheet" href="style/HamburgerMenu.css">
-    <link rel="stylesheet" href="style/PageTransition.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style/style.css" />
+    <link rel="stylesheet" href="style/canvas.css" />
+    <link rel="stylesheet" href="style/HamburgerMenu.css" />
+    <link rel="stylesheet" href="style/PageTransition.css" />
+    <link rel="stylesheet" href="style/InformationPanel.css" />
+  </head>
+  <body>
     <div class="canvas-container">
-        <div class="draggable-canvas">
-            <!-- Những gì viết trong đây khi kéo thả nền thì sẽ đi theo -->
-            <h1 style="position: absolute; left: 1500px; top: 600px;">
-                Try dragging the background
-            </h1>
-            
-            <p style="position: absolute; left: 1500px; top: 700px;">
-                Also test
-            </p>
+      <div class="draggable-canvas">
+        <!-- Những gì viết trong đây khi kéo thả nền thì sẽ đi theo -->
+        <h1 style="position: absolute; left: 1500px; top: 600px">
+          Try dragging the background
+        </h1>
 
-            <!-- Hết -->
-        </div>
+        <p style="position: absolute; left: 1500px; top: 700px">Also test</p>
+
+        <!-- Hết -->
+      </div>
     </div>
-    
+
     <!-- Những gì viết ngoài đây thì sẽ không đi theo khi kéo thả nền -->
 
-    <div> <!-- Hamburger menu-->
-        <nav class="sidebar">
-            <div class="hamburger">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <a href="#">Do smt 1</a>    
-            <a href="#">Do smt 2</a>
-            <a href="#">Go smw</a>
-            <a href="#" onclick="goToPage('main')">Quit</a>
-        </nav>
-    </div> <!-- End_ Hamburger menu-->
+    <div>
+      <!-- Hamburger menu-->
+      <nav class="sidebar">
+        <div class="hamburger">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <a href="#">Do smt 1</a>
+        <a href="#">Do smt 2</a>
+        <a href="#">Go smw</a>
+        <a href="#" onclick="goToPage('main')">Quit</a>
+      </nav>
+    </div>
+    <!-- End_ Hamburger menu-->
 
-
-    <h1 style="position: fixed; left: 700px; top: 100px;">Test Family Tree title</h1>
+    <h1 style="position: fixed; left: 700px; top: 100px">
+      Test Family Tree title
+    </h1>
+    <!--Search box -->
+    <div class="Searchbox_container">
+      <input type="text" placeholder="Vui lòng nhập tên..." />
+      <div class="search"></div>
+    </div>
+    <!--Panel bên phải-->
+    <div class="info-panel">
+      <img src="img/avatar.jpg" alt="avatar_image1" />
+      <h2>THÔNG TIN CÁ NHÂN</h2>
+      <div class="info-item">
+        <strong>Họ và tên:</strong> <span id="info-name"></span>
+      </div>
+      <div class="info-item">
+        <strong>Tuổi:</strong> <span id="info-age"></span>
+      </div>
+      <div class="info-item">
+        <strong>Ngày sinh:</strong> <span id="info-birthday"></span>
+      </div>
+      <div class="info-item">
+        <strong>Giới tính:</strong> <span id="info-gender"></span>
+      </div>
+    </div>
     <!-- Hết -->
-
     <script src="script/canvas.js"></script>
     <script src="script/HamburgerMenu.js"></script>
     <script src="script/PageTransition.js"></script>
-</body>
+  </body>
 </html>
