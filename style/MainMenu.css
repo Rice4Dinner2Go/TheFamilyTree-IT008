@@ -25,6 +25,13 @@ h1 {
     color: #2c3e50;
 }
 
+h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
 .button-container {
     display: flex;
     flex-direction: column;
@@ -34,6 +41,7 @@ h1 {
 .menu-button {
     padding: 1rem 2rem;
     font-size: 2rem;
+    font-weight: bolder;
     border: 5px solid transparent;
     border-radius: 8px;
     background: #2c3e50;
@@ -48,7 +56,7 @@ h1 {
     color: #34495e;
     border-color: #34495e;
     background: white;
-
+    transform: translateY(-2px);
 }
 
 .start-button {
@@ -60,9 +68,10 @@ h1 {
     background: white;
     color: rgb(126, 198, 190);
     border-color: rgb(126, 198, 190);
+    transform: translateY(-2px);
 }
 
-/* Form popup khi user chọn make a new tree */
+/* Form popup khi user chọn make a new tree hoặc import */
 .popup-overlay {
     display: none;
     position: fixed;
@@ -94,6 +103,8 @@ h1 {
 .form-group {
     margin-bottom: 1.5rem;
 }
+
+/* New Tree Form */
 
 .form-group label {
     display: block;
@@ -155,4 +166,51 @@ h1 {
     background: white;
     color: #e74c3c;
     border: 2px solid #e74c3c;
+}
+
+/* Import Form */
+
+.import-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.import-option-btn {
+    padding: 1rem 2rem;
+    font-size: 2rem;
+    font-weight: bolder;
+    border: transparent 5px solid;
+    border-radius: 8px;
+    background: #2c3e50;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.import-option-btn:hover {
+    background: white;
+    color: #34495e;
+    border: #34495e 5px solid;
+    transform: translateY(-2px);
+}
+
+.import-options .cancel-btn {
+    padding: 1rem 2rem;
+    font-size: 2rem;
+    font-weight: bolder;
+    border: transparent 5px solid;
+    border-radius: 8px;
+    background: #e74c3c;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.import-options .cancel-btn:hover {
+    background: white;
+    color: #e74c3c;
+    border: #e74c3c 5px solid;
+    transform: translateY(-2px);
 }

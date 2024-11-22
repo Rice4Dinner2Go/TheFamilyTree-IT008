@@ -11,12 +11,12 @@
     <div class="container">
         <h1>Family Tree</h1>
         <div class="button-container">
-            <button class="menu-button start-button" onclick="showForm()">Make a new Tree</button>
-            <button class="menu-button">Import a Tree</button>
+            <button class="menu-button start-button" onclick="showNewTreeForm()">Make a new Tree</button>
+            <button class="menu-button" onclick="showImportForm()">Import a Tree</button>
         </div>
     </div>
 
-    <!-- Popup Form -->
+    <!-- New Tree Form -->
     <div class="popup-overlay" id="popupForm-newTree">
         <div class="popup-form">
             <h2>Make for who?</h2>
@@ -39,10 +39,22 @@
                     <input type="date" id="dob" name="dob" required>
                 </div>
                 <div class="form-buttons">
-                    <button type="button" class="cancel-btn" onclick="hideForm()">Cancel</button>
+                    <button type="button" class="cancel-btn" onclick="hideNewTreeForm()">Cancel</button>
                     <button type="submit" class="submit-btn">Submit</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Import Popup Form -->
+    <div class="popup-overlay" id="popupForm-import">
+        <div class="popup-form">
+            <h2>Import Options</h2>
+            <div class="import-options">
+                <button class="import-option-btn" onclick="importFromJson()">Import from JSON</button>
+                <button class="import-option-btn" onclick="importFromExcel()">Import from Excel</button>
+                <button class="cancel-btn" onclick="hideImportForm()">Return</button>
+            </div>
         </div>
     </div>
 
@@ -51,7 +63,7 @@
     <script>
         document.getElementById('newTreeForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            // Here you can collect form data if needed
+            // Để tương tác với data sau
             goToPage('tree');
         });
     </script>
