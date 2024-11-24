@@ -1,28 +1,3 @@
-p {
-  background: white;
-  padding: 10px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 10px;
-  display: inline-block;
-}
-/*Search Box */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html,
-body {
-  width: 100%;
-  height: 100%;
-}
-
-body {
-  background: #252525;
-}
-
 .Searchbox_container {
   position: fixed;
   margin: 0%;
@@ -138,3 +113,4 @@ body {
   }
 }
 /* Hết */
+

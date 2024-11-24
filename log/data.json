@@ -1,0 +1,454 @@
+{
+    "people": [
+        {
+            "id": "P001",
+            "name": "John Smith",
+            "gender": "Male",
+            "dateOfBirth": "1960-05-15",
+            "age": 63,
+            "partnerId": "P002",
+            "parentsIds": ["P003", "P004"],
+            "childrenIds": ["P005", "P006", "P007"]
+        },
+        {
+            "id": "P002",
+            "name": "Mary Smith",
+            "gender": "Female",
+            "dateOfBirth": "1962-08-22",
+            "age": 61,
+            "partnerId": "P001",
+            "parentsIds": ["P008", "P009"],
+            "childrenIds": ["P005", "P006", "P007"]
+        },
+        {
+            "id": "P003",
+            "name": "Robert Smith",
+            "gender": "Male",
+            "dateOfBirth": "1935-03-10",
+            "age": 88,
+            "partnerId": "P004",
+            "parentsIds": [],
+            "childrenIds": ["P001", "P010", "P011"]
+        },
+        {
+            "id": "P004",
+            "name": "Patricia Smith",
+            "gender": "Female",
+            "dateOfBirth": "1938-11-28",
+            "age": 85,
+            "partnerId": "P003",
+            "parentsIds": [],
+            "childrenIds": ["P001", "P010", "P011"]
+        },
+        {
+            "id": "P005",
+            "name": "Michael Smith",
+            "gender": "Male",
+            "dateOfBirth": "1990-02-14",
+            "age": 33,
+            "partnerId": "P012",
+            "parentsIds": ["P001", "P002"],
+            "childrenIds": ["P013", "P014"]
+        },
+        {
+            "id": "P006",
+            "name": "Sarah Johnson",
+            "gender": "Female",
+            "dateOfBirth": "1992-07-30",
+            "age": 31,
+            "partnerId": "P015",
+            "parentsIds": ["P001", "P002"],
+            "childrenIds": ["P016"]
+        },
+        {
+            "id": "P007",
+            "name": "David Smith",
+            "gender": "Male",
+            "dateOfBirth": "1994-12-05",
+            "age": 29,
+            "partnerId": "P017",
+            "parentsIds": ["P001", "P002"],
+            "childrenIds": ["P018", "P019"]
+        },
+        {
+            "id": "P008",
+            "name": "William Johnson",
+            "gender": "Male",
+            "dateOfBirth": "1940-06-18",
+            "age": 83,
+            "partnerId": "P009",
+            "parentsIds": [],
+            "childrenIds": ["P002", "P020"]
+        },
+        {
+            "id": "P009",
+            "name": "Elizabeth Johnson",
+            "gender": "Female",
+            "dateOfBirth": "1942-09-25",
+            "age": 81,
+            "partnerId": "P008",
+            "parentsIds": [],
+            "childrenIds": ["P002", "P020"]
+        },
+        {
+            "id": "P010",
+            "name": "Thomas Smith",
+            "gender": "Male",
+            "dateOfBirth": "1962-04-12",
+            "age": 61,
+            "partnerId": "P021",
+            "parentsIds": ["P003", "P004"],
+            "childrenIds": ["P022", "P023"]
+        },
+        {
+            "id": "P011",
+            "name": "Jane Wilson",
+            "gender": "Female",
+            "dateOfBirth": "1964-11-03",
+            "age": 59,
+            "partnerId": "P024",
+            "parentsIds": ["P003", "P004"],
+            "childrenIds": ["P025"]
+        },
+        {
+            "id": "P012",
+            "name": "Emma Davis",
+            "gender": "Female",
+            "dateOfBirth": "1991-08-20",
+            "age": 32,
+            "partnerId": "P005",
+            "parentsIds": [],
+            "childrenIds": ["P013", "P014"]
+        },
+        {
+            "id": "P013",
+            "name": "Oliver Smith",
+            "gender": "Male",
+            "dateOfBirth": "2018-03-12",
+            "age": 5,
+            "partnerId": "",
+            "parentsIds": ["P005", "P012"],
+            "childrenIds": []
+        },
+        {
+            "id": "P014",
+            "name": "Sophia Smith",
+            "gender": "Female",
+            "dateOfBirth": "2020-07-25",
+            "age": 3,
+            "partnerId": "",
+            "parentsIds": ["P005", "P012"],
+            "childrenIds": []
+        },
+        {
+            "id": "P015",
+            "name": "James Johnson",
+            "gender": "Male",
+            "dateOfBirth": "1991-05-15",
+            "age": 32,
+            "partnerId": "P006",
+            "parentsIds": [],
+            "childrenIds": ["P016"]
+        },
+        {
+            "id": "P016",
+            "name": "Liam Johnson",
+            "gender": "Male",
+            "dateOfBirth": "2019-10-08",
+            "age": 4,
+            "partnerId": "",
+            "parentsIds": ["P006", "P015"],
+            "childrenIds": []
+        },
+        {
+            "id": "P017",
+            "name": "Ava Brown",
+            "gender": "Female",
+            "dateOfBirth": "1995-09-28",
+            "age": 28,
+            "partnerId": "P007",
+            "parentsIds": [],
+            "childrenIds": ["P018", "P019"]
+        },
+        {
+            "id": "P018",
+            "name": "Lucas Smith",
+            "gender": "Male",
+            "dateOfBirth": "2021-02-14",
+            "age": 2,
+            "partnerId": "",
+            "parentsIds": ["P007", "P017"],
+            "childrenIds": []
+        },
+        {
+            "id": "P019",
+            "name": "Mia Smith",
+            "gender": "Female",
+            "dateOfBirth": "2023-01-30",
+            "age": 0,
+            "partnerId": "",
+            "parentsIds": ["P007", "P017"],
+            "childrenIds": []
+        },
+        {
+            "id": "P020",
+            "name": "Emily Taylor",
+            "gender": "Female",
+            "dateOfBirth": "1965-07-19",
+            "age": 58,
+            "partnerId": "P026",
+            "parentsIds": ["P008", "P009"],
+            "childrenIds": ["P027", "P028"]
+        },
+        {
+            "id": "P021",
+            "name": "Sophie Anderson",
+            "gender": "Female",
+            "dateOfBirth": "1963-12-08",
+            "age": 60,
+            "partnerId": "P010",
+            "parentsIds": [],
+            "childrenIds": ["P022", "P023"]
+        },
+        {
+            "id": "P022",
+            "name": "Daniel Smith",
+            "gender": "Male",
+            "dateOfBirth": "1988-06-24",
+            "age": 35,
+            "partnerId": "",
+            "parentsIds": ["P010", "P021"],
+            "childrenIds": []
+        },
+        {
+            "id": "P023",
+            "name": "Isabella Smith",
+            "gender": "Female",
+            "dateOfBirth": "1990-11-15",
+            "age": 33,
+            "partnerId": "",
+            "parentsIds": ["P010", "P021"],
+            "childrenIds": []
+        },
+        {
+            "id": "P024",
+            "name": "George Wilson",
+            "gender": "Male",
+            "dateOfBirth": "1963-08-30",
+            "age": 60,
+            "partnerId": "P011",
+            "parentsIds": [],
+            "childrenIds": ["P025"]
+        },
+        {
+            "id": "P025",
+            "name": "Charlotte Wilson",
+            "gender": "Female",
+            "dateOfBirth": "1989-04-17",
+            "age": 34,
+            "partnerId": "",
+            "parentsIds": ["P011", "P024"],
+            "childrenIds": []
+        },
+        {
+            "id": "P026",
+            "name": "Henry Taylor",
+            "gender": "Male",
+            "dateOfBirth": "1964-03-22",
+            "age": 59,
+            "partnerId": "P020",
+            "parentsIds": [],
+            "childrenIds": ["P027", "P028"]
+        },
+        {
+            "id": "P027",
+            "name": "William Taylor",
+            "gender": "Male",
+            "dateOfBirth": "1992-01-05",
+            "age": 31,
+            "partnerId": "",
+            "parentsIds": ["P020", "P026"],
+            "childrenIds": []
+        },
+        {
+            "id": "P028",
+            "name": "Grace Taylor",
+            "gender": "Female",
+            "dateOfBirth": "1994-09-12",
+            "age": 29,
+            "partnerId": "",
+            "parentsIds": ["P020", "P026"],
+            "childrenIds": []
+        },
+        {
+            "id": "P029",
+            "name": "Benjamin Wilson",
+            "gender": "Male",
+            "dateOfBirth": "1965-03-15",
+            "age": 58,
+            "partnerId": "P030",
+            "parentsIds": [],
+            "childrenIds": ["P031", "P032"]
+        },
+        {
+            "id": "P030",
+            "name": "Rachel Wilson",
+            "gender": "Female",
+            "dateOfBirth": "1967-09-22",
+            "age": 56,
+            "partnerId": "P029",
+            "parentsIds": [],
+            "childrenIds": ["P031", "P032"]
+        },
+        {
+            "id": "P031",
+            "name": "Nathan Wilson",
+            "gender": "Male",
+            "dateOfBirth": "1992-11-08",
+            "age": 31,
+            "partnerId": "P033",
+            "parentsIds": ["P029", "P030"],
+            "childrenIds": ["P034", "P035"]
+        },
+        {
+            "id": "P032",
+            "name": "Hannah Wilson",
+            "gender": "Female",
+            "dateOfBirth": "1995-04-30",
+            "age": 28,
+            "partnerId": "",
+            "parentsIds": ["P029", "P030"],
+            "childrenIds": ["P036"]
+        },
+        {
+            "id": "P033",
+            "name": "Victoria Chen",
+            "gender": "Female",
+            "dateOfBirth": "1993-07-14",
+            "age": 30,
+            "partnerId": "P031",
+            "parentsIds": [],
+            "childrenIds": ["P034", "P035"]
+        },
+        {
+            "id": "P034",
+            "name": "Ethan Wilson",
+            "gender": "Male",
+            "dateOfBirth": "2019-12-03",
+            "age": 4,
+            "partnerId": "",
+            "parentsIds": ["P031", "P033"],
+            "childrenIds": []
+        },
+        {
+            "id": "P035",
+            "name": "Zoe Wilson",
+            "gender": "Female",
+            "dateOfBirth": "2022-05-17",
+            "age": 1,
+            "partnerId": "",
+            "parentsIds": ["P031", "P033"],
+            "childrenIds": []
+        },
+        {
+            "id": "P036",
+            "name": "Lily Wilson",
+            "gender": "Female",
+            "dateOfBirth": "2020-08-25",
+            "age": 3,
+            "partnerId": "",
+            "parentsIds": ["P032"],
+            "childrenIds": []
+        },
+        {
+            "id": "P037",
+            "name": "Christopher Davis",
+            "gender": "Male",
+            "dateOfBirth": "1940-01-20",
+            "age": 83,
+            "partnerId": "P038",
+            "parentsIds": [],
+            "childrenIds": ["P039", "P040"]
+        },
+        {
+            "id": "P038",
+            "name": "Margaret Davis",
+            "gender": "Female",
+            "dateOfBirth": "1942-06-11",
+            "age": 81,
+            "partnerId": "P037",
+            "parentsIds": [],
+            "childrenIds": ["P039", "P040"]
+        },
+        {
+            "id": "P039",
+            "name": "Andrew Davis",
+            "gender": "Male",
+            "dateOfBirth": "1970-09-28",
+            "age": 53,
+            "partnerId": "P041",
+            "parentsIds": ["P037", "P038"],
+            "childrenIds": ["P042", "P043"]
+        },
+        {
+            "id": "P040",
+            "name": "Catherine Davis",
+            "gender": "Female",
+            "dateOfBirth": "1973-12-05",
+            "age": 50,
+            "partnerId": "P044",
+            "parentsIds": ["P037", "P038"],
+            "childrenIds": ["P045"]
+        },
+        {
+            "id": "P041",
+            "name": "Julia Martinez",
+            "gender": "Female",
+            "dateOfBirth": "1972-03-19",
+            "age": 51,
+            "partnerId": "P039",
+            "parentsIds": [],
+            "childrenIds": ["P042", "P043"]
+        },
+        {
+            "id": "P042",
+            "name": "Samuel Davis",
+            "gender": "Male",
+            "dateOfBirth": "2000-11-14",
+            "age": 23,
+            "partnerId": "",
+            "parentsIds": ["P039", "P041"],
+            "childrenIds": []
+        },
+        {
+            "id": "P043",
+            "name": "Emma Davis",
+            "gender": "Female",
+            "dateOfBirth": "2003-07-22",
+            "age": 20,
+            "partnerId": "",
+            "parentsIds": ["P039", "P041"],
+            "childrenIds": []
+        },
+        {
+            "id": "P044",
+            "name": "Matthew Thompson",
+            "gender": "Male",
+            "dateOfBirth": "1971-05-08",
+            "age": 52,
+            "partnerId": "P040",
+            "parentsIds": [],
+            "childrenIds": ["P045"]
+        },
+        {
+            "id": "P045",
+            "name": "Sophie Thompson",
+            "gender": "Female",
+            "dateOfBirth": "2005-02-28",
+            "age": 18,
+            "partnerId": "",
+            "parentsIds": ["P040", "P044"],
+            "childrenIds": []
+        }
+    ]
+}

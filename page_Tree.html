@@ -2,19 +2,18 @@
 <html>
   <head>
     <title>Family Tree</title>
-    <link rel="stylesheet" href="style/style.css" />
-    <link rel="stylesheet" href="style/canvas.css" />
-    <link rel="stylesheet" href="style/HamburgerMenu.css" />
-    <link rel="stylesheet" href="style/PageTransition.css" />
-    <link rel="stylesheet" href="style/InformationPanel.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/canvas.css">
+    <link rel="stylesheet" href="style/HamburgerMenu.css">
+    <link rel="stylesheet" href="style/PageTransition.css">
+    <link rel="stylesheet" href="style/FamilyTree.css">
+</head>
+<body>
     <div class="canvas-container">
-      <div class="draggable-canvas">
-        <!-- Những gì viết trong đây khi kéo thả nền thì sẽ đi theo -->
-        <h1 style="position: absolute; left: 1500px; top: 600px">
-          Try dragging the background
-        </h1>
+        <div class="draggable-canvas">
+            <!-- Những gì viết trong đây khi kéo thả nền thì sẽ đi theo -->
+
+            <div class="tree" id="familyTree" style="position: absolute; top: 40%; left: 36%"></div>
 
         <p style="position: absolute; left: 1500px; top: 700px">Also test</p>
 
@@ -23,29 +22,29 @@
     </div>
 
     <!-- Những gì viết ngoài đây thì sẽ không đi theo khi kéo thả nền -->
-
-    <div>
-      <!-- Hamburger menu-->
-      <nav class="sidebar">
-        <div class="hamburger">
-          <div></div>
-          <div></div>
-          <div></div>
+    <div> <!-- Hamburger menu-->
+        <div class="sidebar">
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <bold style="font-size: 40px;" >Family Tree</bold>
+            <div class="seperator"></div>
+            <a>Do smt 1</a>
+            <div class="seperator"></div> 
+            <a>Do smt 2</a>
+            <a>Go smw</a>
+            <a onclick="goToPage('main')">Quit</a>
         </div>
-        <a href="#">Do smt 1</a>
-        <a href="#">Do smt 2</a>
-        <a href="#">Go smw</a>
-        <a href="#" onclick="goToPage('main')">Quit</a>
-      </nav>
-    </div>
-    <!-- End_ Hamburger menu-->
+    </div> <!-- End_ Hamburger menu-->
 
     <h1 style="position: fixed; left: 700px; top: 100px">
       Test Family Tree title
     </h1>
     <!--Search box -->
     <div class="Searchbox_container">
-      <input type="text" placeholder="Vui lòng nhập tên..." />
+      <input type="text" placeholder="Enter a name to search..." />
       <div class="search"></div>
     </div>
     <!--Panel bên phải-->
@@ -69,5 +68,7 @@
     <script src="script/canvas.js"></script>
     <script src="script/HamburgerMenu.js"></script>
     <script src="script/PageTransition.js"></script>
-  </body>
+    <script src="script/FamilyTree.js"></script>
+</body>
 </html>
+
