@@ -10,6 +10,13 @@
     z-index: 99;
 }
 
+.seperator {
+    height: 1px;
+    width: 100%;
+    background: rgb(107, 164, 175);
+    margin: 20px 0;
+}
+
 .hamburger {
     position: absolute;
     top: 50%;
