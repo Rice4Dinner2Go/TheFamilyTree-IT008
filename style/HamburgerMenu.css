@@ -1,76 +1,201 @@
 .sidebar {
-    position: fixed;
-    left: -250px;
-    top: 0;
-    height: 100%;
-    width: 250px;
-    background: rgb(126, 198, 190);
-    transition: 0.4s;
-    padding-top: 60px;
-    z-index: 99;
-}
-
-.seperator {
-    height: 1px;
-    width: 100%;
-    background: rgb(107, 164, 175);
-    margin: 20px 0;
+  position: fixed;
+  left: -250px;
+  top: 0;
+  height: 100%;
+  width: 250px;
+  background-color: #50e3b7;
+  transition: 0.4s;
+  padding-top: 60px;
+  border-radius: 10px;
 }
 
 .hamburger {
-    position: absolute;
-    top: 50%;
-    right: -65px; /* Position it outside the sidebar */
-    transform: translateY(-50%);
-    cursor: pointer;
-    z-index: 100;
-    padding: 10px;
-    background: rgb(126, 198, 190);
-    border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  right: -65px; /* Position it outside the sidebar */
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 100;
+  padding: 10px;
+  background-color: #50e3b7;
+  border-radius: 5px;
 }
 
 .hamburger div {
-    width: 40px;
-    height: 5px;
-    border-radius: 5px;
-    background: #333;
-    margin: 6px 0;
-    transition: 0.4s;
+  width: 40px;
+  height: 5px;
+  border-radius: 5px;
+  background: #333;
+  margin: 6px 0;
+  transition: 0.4s;
 }
 
 .sidebar.active {
-    left: 0;
+  left: 0;
 }
 
 .sidebar a {
-    display: block;
-    color: black;
-    font-weight: bolder;
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 16px;
-    text-decoration: none;
-    font-size: 18px;
-    transition: 0.3s;
+  display: block;
+  color: black;
+  font-weight: bolder;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode";
+  padding: 16px;
+  text-decoration: none;
+  font-size: 18px;
+  transition: 0.3s;
 }
 
 .sidebar a:hover {
-    background: rgb(107, 164, 175);
+  background: rgb(107, 164, 175);
 }
 
 /* Hamburger animation */
 .hamburger.active div:nth-child(1) {
-    transform: rotate(-45deg) translate(-8px, 8px);
+  transform: rotate(-45deg) translate(-8px, 8px);
 }
 
 .hamburger.active div:nth-child(2) {
-    opacity: 0;
+  opacity: 0;
 }
 
 .hamburger.active div:nth-child(3) {
-    transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
 }
 
 .content {
-    padding: 20px;
-    margin-left: 60px;
+  padding: 20px;
+  margin-left: 60px;
+}
+
+/* Popup style */
+.popup {
+  position: fixed;
+  top: 20%;
+  left: 30%;
+  width: 1000px;
+  transform: translate(-50%, -50%);
+  max-width: 600px;
+  background-color: #50e3b7; /* Màu nền xanh nhạt */
+  color: #000; /* Màu chữ đen */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); /* Bóng đổ */
+  font-family: "Arial", sans-serif;
+  animation: slideDown 0.5s ease-out; /* Hiệu ứng trượt xuống */
+  transform: scale(1); /* Giữ tỷ lệ mặc định */
+  overflow: hidden; /* Loại bỏ nội dung tràn */
+  z-index: 99;
+}
+/* Hiệu ứng xuất hiện */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9); /* Bắt đầu từ trên cao, nhỏ hơn */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1); /* Dừng lại tại vị trí ban đầu */
+  }
+}
+/* Tiêu đề popup */
+.popup h3 {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: #000; /* Màu đen */
+}
+
+/* Các input và select */
+.popup label {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  display: inline;
+}
+
+.popup input[type="text"],
+.popup input[type="number"],
+.popup input[type="date"],
+.popup select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+.popup input[type="color"] {
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+/* Container cho các nút */
+.popup button {
+  display: inline-block;
+  padding: 10px 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Nút Cancel */
+#cancelNewTreeBtn,
+#cancelCheckRelationshipBtn,
+#cancelSettingsBtn {
+  background: linear-gradient(135deg, #ff5f6d, #ffc371); /* Gradient đỏ cam */
+  color: white;
+  box-shadow: 0px 5px 10px rgba(255, 95, 109, 0.3);
+}
+
+#cancelNewTreeBtn:hover,
+#cancelCheckRelationshipBtn:hover,
+#cancelSettingsBtn:hover {
+  background: linear-gradient(135deg, #e04a54, #e88a3d); /* Hover */
+  transform: translateY(-3px);
+  box-shadow: 0px 8px 15px rgba(255, 95, 109, 0.5);
+}
+
+/* Nút Action (Enter, Apply, Check) */
+#createTreeBtn,
+#checkRelationshipBtnPopup,
+#applySettingsBtn {
+  background: linear-gradient(135deg, #28a745, #34d058); /* Gradient xanh lá */
+  color: white;
+  box-shadow: 0px 5px 10px rgba(40, 167, 69, 0.3);
+}
+
+#createTreeBtn:hover,
+#checkRelationshipBtnPopup:hover,
+#applySettingsBtn:hover {
+  background: linear-gradient(135deg, #218838, #28a745); /* Hover */
+  transform: translateY(-3px);
+  box-shadow: 0px 8px 15px rgba(40, 167, 69, 0.5);
+}
+
+/* Căn chỉnh nút */
+.popup button + button {
+  margin-left: 330px; /* Khoảng cách giữa các nút */
+}
+
+.popup button {
+  width: auto; /* Đảm bảo nút có chiều rộng tự động tùy thuộc vào nội dung */
+  margin: 0;
+}
+
+.overlay {
+  display: none; /* Ẩn overlay khi popup chưa hiển thị */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Nền tối mờ */
+  z-index: 98; /* Nằm dưới popup nhưng trên nội dung trang */
 }
