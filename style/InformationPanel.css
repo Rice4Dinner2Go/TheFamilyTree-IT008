@@ -4,9 +4,9 @@
   top: 0;
   right: 0;
   bottom: 0;
-  width: 300px;
+  width: 20vw;
   padding: 20px;
-  background-color: #50e3b7;
+  background-color: #7ec6be;
   font-family: Arial, sans-serif;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -36,7 +36,7 @@
 }
 .Toolbar_container {
   font-family: Arial, sans-serif;
-  margin-left: 10px; /* Căn lề trái */
+  /* margin-left: 10px; Căn lề trái */
   padding: 10px;
   background-color: #f7f732ea;
   display: flex;
@@ -45,7 +45,7 @@
   position: fixed; /* Giữ thanh công cụ cố định khi cuộn trang */
   top: 0; /* Đặt thanh công cụ từ đầu trang */
   bottom: 0;
-  left: 74.6%; /* Đặt thanh công cụ ở bên trái */
+  right: 22vw; /* Đặt thanh công cụ ngay bên cạnh panel info */
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
@@ -53,7 +53,7 @@
 .toolbarButton {
   font-size: 30px;
   font-weight: bold;
-  background-color: #5bdf7a;
+  background-color: #7ec6be;
   color: #fff;
   border: none;
   border-radius: 50%;
@@ -67,7 +67,7 @@
 }
 
 .toolbarButton:hover {
-  background-color: #218838;
+  background-color: #7ec6be;
 }
 /*Hộp thoại thêm thành viên*/
 .dialog {
@@ -88,7 +88,7 @@
 }
 
 .dialog-content {
-  background-color: #50e3b7;
+  background-color: #7ec6be;
   color: black;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode";

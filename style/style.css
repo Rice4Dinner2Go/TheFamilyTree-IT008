@@ -1,18 +1,11 @@
-/* p {
-    background: white;
-    padding: 10px;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin: 10px;
-    display: inline-block;
-} */
-/*Search Box */
-* {
+
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+} */
 
+/*Search Box */
 .Searchbox_container {
   position: fixed;
   margin: 0%;
@@ -22,6 +15,8 @@
   bottom: 0;
   width: 300px;
   height: 100px;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .Searchbox_container .search {
