@@ -1,0 +1,202 @@
+/* Info panel bên phải */
+.info-panel {
+  position: fixed;
+  top: 0;
+  right: 0vw;
+  bottom: 0;
+  width: 20vw;
+  padding: 20px;
+  background-color: #7ec6be;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.info-item.active {
+  background-color: #e04a54;
+}
+
+.info-panel h2 {
+  margin-bottom: 100px;
+  font-size: 18px;
+  color: black;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  text-align: center;
+}
+
+.info-item {
+  margin-bottom: 20px;
+  color: black;
+  font-size: 16px;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+.info-panel img {
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  margin: 0 auto 30px;
+  display: block;
+}
+.Toolbar_container {
+  font-family: Arial, sans-serif;
+  /* margin-left: 10px; Căn lề trái */
+  padding: 10px;
+  background-color:  #7AB2B2;
+  display: flex;
+  flex-direction: column; /* Căn chỉnh các button theo chiều dọc */
+  justify-content: center; /* Đặt các button ở đầu */
+  position: fixed; /* Giữ thanh công cụ cố định khi cuộn trang */
+  top: 0; /* Đặt thanh công cụ từ đầu trang */
+  bottom: 0;
+  right: 22vw; /* Đặt thanh công cụ ngay bên cạnh panel info */
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.toolbarButton {
+  font-size: 30px;
+  font-weight: bold;
+  background-color: #caf9f3;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px; /* Thêm khoảng cách giữa các button */
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toolbarButton:hover {
+  background-color: #defdf9;
+}
+/*Hộp thoại thêm thành viên*/
+.dialog {
+  position: fixed;
+  top: 0;
+  right: 30px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.dialog.hidden {
+  display: none;
+}
+
+.dialog-content {
+  background-color: white;
+  color: black;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode";
+  width: 50%; /* Chiếm 90% chiều rộng màn hình */
+  max-width: 500px; /* Đặt chiều rộng tối đa */
+  height: auto; /* T  ự động điều chỉnh chiều cao theo nội dung */
+  padding: 30px; /* Tăng khoảng cách nội dung */
+  border-radius: 15px; /* Bo góc mềm mại */
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2); /* Đổ bóng tinh tế */
+  position: relative; /* Đảm bảo nội dung được căn chỉnh đúng */
+  animation: slideDown 0.2s ease-out; /* Hiệu ứng trượt xuống */
+  transform: scale(1); /* Giữ tỷ lệ mặc định */
+  overflow: hidden; /* Loại bỏ nội dung tràn */
+}
+/* Hiệu ứng xuất hiện */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9); /* Bắt đầu từ trên cao, nhỏ hơn */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1); /* Dừng lại tại vị trí ban đầu */
+  }
+}
+
+.dialog-content h2 {
+  margin-top: 0;
+  text-align: center;
+}
+.dialog-content h3 {
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 20px;
+}
+input[type="text"],
+input[type="date"],
+select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+input[type="radio"] {
+  margin-right: 10px;
+}
+#editDialog input[type="text"],
+input[type="date"] {
+  margin-bottom: 10px;
+}
+input:focus,
+select:focus {
+    border-color: rgb(126, 198, 190);
+    outline: none;
+}
+.dialog-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+/* Thêm hoạt ảnh nút */
+.create-btn,
+.cancel-btn {
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  flex: 1;
+  padding: 0.8rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.create-btn {
+  background:#28a745;
+  color: white;
+}
+
+.create-btn:hover {
+  background: #218838; /* Hover */
+  transform: translateY(-3px);
+}
+
+.cancel-btn {
+  background: #ff5f6d;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background: #e04a54; /* Hover */
+  transform: translateY(-3px);
+}
