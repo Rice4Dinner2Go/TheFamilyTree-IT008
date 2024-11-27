@@ -71,19 +71,20 @@
 
 /* Popup style */
 .popup {
+  display: flex;
   position: fixed;
   top: 20%;
   left: 30%;
-  width: 1000px;
+  width: 800px;
   transform: translate(-50%, -50%);
   max-width: 600px;
-  background-color: #7ec6be; /* Màu nền xanh nhạt */
+  background-color: white; /* Màu nền trắng */
   color: #000; /* Màu chữ đen */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); /* Bóng đổ */
   font-family: "Arial", sans-serif;
-  animation: slideDown 0.5s ease-out; /* Hiệu ứng trượt xuống */
+  animation: slideDown 0.2s ease-out; /* Hiệu ứng trượt xuống */
   transform: scale(1); /* Giữ tỷ lệ mặc định */
   overflow: hidden; /* Loại bỏ nội dung tràn */
   z-index: 99;
@@ -120,73 +121,73 @@
 .popup input[type="date"],
 .popup select {
   width: 100%;
-  padding: 10px;
-  margin-top: 20px;
-  margin-bottom: 5px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 15px;
+  padding: 0.8rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
   box-sizing: border-box;
 }
 .popup input[type="color"] {
   border-radius: 5px;
-  border: 1px solid #ddd;
+  border: 2px solid #ddd;
 }
-/* Container cho các nút */
-.popup button {
-  display: inline-block;
-  padding: 10px 25px;
-  font-size: 1rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+
+.popup.input:focus,
+.popup.select:focus {
+    border-color: rgb(126, 198, 190);
+    outline: none;
 }
 
 /* Nút Cancel */
 #cancelNewTreeBtn,
 #cancelCheckRelationshipBtn,
 #cancelSettingsBtn {
-  background: linear-gradient(135deg, #ff5f6d, #ffc371); /* Gradient đỏ cam */
+  background: #ff5f6d; /* Gradient đỏ cam */
   color: white;
-  box-shadow: 0px 5px 10px rgba(255, 95, 109, 0.3);
 }
 
 #cancelNewTreeBtn:hover,
 #cancelCheckRelationshipBtn:hover,
 #cancelSettingsBtn:hover {
-  background: linear-gradient(135deg, #e04a54, #e88a3d); /* Hover */
-  transform: translateY(-3px);
-  box-shadow: 0px 8px 15px rgba(255, 95, 109, 0.5);
+  background: #e04a54; /* Hover */
+  transform: translateY(-3px)
 }
 
 /* Nút Action (Enter, Apply, Check) */
 #createTreeBtn,
 #checkRelationshipBtnPopup,
 #applySettingsBtn {
-  background: linear-gradient(135deg, #28a745, #34d058); /* Gradient xanh lá */
+  background:#28a745;
   color: white;
-  box-shadow: 0px 5px 10px rgba(40, 167, 69, 0.3);
 }
 
 #createTreeBtn:hover,
 #checkRelationshipBtnPopup:hover,
 #applySettingsBtn:hover {
-  background: linear-gradient(135deg, #218838, #28a745); /* Hover */
+  background: #218838; /* Hover */
   transform: translateY(-3px);
-  box-shadow: 0px 8px 15px rgba(40, 167, 69, 0.5);
 }
 
 /* Căn chỉnh nút */
-.popup button + button {
-  margin-left: 330px; /* Khoảng cách giữa các nút */
+.popup .menu-widgets-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  gap: 1rem;
 }
 
 .popup button {
-  width: auto; /* Đảm bảo nút có chiều rộng tự động tùy thuộc vào nội dung */
-  margin: 0;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  flex: 1;
+  padding: 0.8rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
 .overlay {

@@ -77,3 +77,8 @@ editForm.addEventListener("submit", (e) => {
   // Đóng hộp thoại
   editDialog.classList.add("hidden");
 });
+
+function togglePanel(){
+  const infoPanel = document.getElementById("info-panel");
+  infoPanel.classList.toggle("active");
+}

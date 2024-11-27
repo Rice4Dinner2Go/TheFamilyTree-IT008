@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Family Tree</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="style/style.css" />
     <link rel="stylesheet" href="style/canvas.css" />
     <link rel="stylesheet" href="style/HamburgerMenu.css" />
@@ -24,7 +25,7 @@
     </div>
 
     <!-- Những gì viết ngoài đây thì sẽ không đi theo khi kéo thả nền -->
-    <div>
+    <div class="static-content">
       <!-- Hamburger menu-->
       <nav class="sidebar">
         <div class="hamburger">
@@ -54,9 +55,10 @@
           <option value="male">Male</option>
           <option value="female">Female</option></select
         ><br /><br />
-
+        <div class="menu-widgets-buttons">
         <button id="cancelNewTreeBtn">Cancel</button>
         <button id="createTreeBtn">Enter</button>
+        </div>
       </div>
 
       <!-- Popup: Check relationship -->
@@ -74,8 +76,10 @@
           id="person2"
           placeholder="Enter second name"
         /><br /><br />
-        <button id="cancelCheckRelationshipBtn">Cancel</button>
-        <button id="checkRelationshipBtnPopup">Check</button>
+        <div class="menu-widgets-buttons">
+          <button id="cancelCheckRelationshipBtn">Cancel</button>
+          <button id="checkRelationshipBtnPopup">Check</button>
+        </div>
       </div>
 
       <!-- Popup: Interface settings -->
@@ -95,8 +99,10 @@
           id="fontSize"
           placeholder="Font size in px"
         /><br /><br />
-        <button id="cancelSettingsBtn">Cancel</button>
-        <button id="applySettingsBtn">Apply</button>
+        <div class="menu-widgets-buttons">
+          <button id="cancelSettingsBtn">Cancel</button>
+          <button id="applySettingsBtn">Apply</button>
+        </div>
       </div>
       <!-- Popup: Capture tree -->
     </div>
@@ -130,9 +136,11 @@
       </div>
       <!-- Hết -->
       <div class="Toolbar_container">
-        <button id="addButton" class="toolbarButton">➕</button>
-        <button id="editButton" class="toolbarButton">✏️</button>
-        <button id="deleteButton" class="toolbarButton">❌</button>
+        <button id="searchButton" class="toolbarButton"><span class="material-icons" style="font-weight: bold;font-size: 40px; color: #7ec6be">search</span></button> 
+        <button id="addButton" class="toolbarButton"><span class="material-icons" style="font-weight: bold;font-size: 55px; color: #7ec6be">add</span></button>
+        <button id="editButton" class="toolbarButton"><span class="material-icons" style="font-weight: lighter;font-size: 40px; color: #7ec6be">edit</span></button>
+        <button id="deleteButton" class="toolbarButton"><span class="material-icons" style="font-weight: lighter;font-size: 40px; color: #7ec6be">delete</span></button>
+        <button id="infoButton" class="toolbarButton"><span class="material-icons" style="font-weight: lighter;font-size: 40px; color: #7ec6be">info</span></button>
       </div>
       <!-- Hộp thoại thêm thành viên -->
       <div id="dialog" class="dialog hidden">
@@ -184,15 +192,15 @@
                 />
               </label>
               <label>
-                Surname:
-                <input type="text" name="surname" placeholder="Enter surname" />
-              </label>
-              <label>
-                Sex:
+                Gender:
                 <select name="sex">
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
+              </label>
+              <label>
+                Date of birth:
+                <input type="date" name="dateOfBirth" placeholder="Enter date" />
               </label>
             </div>
             <div class="dialog-actions">
