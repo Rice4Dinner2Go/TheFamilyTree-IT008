@@ -5,20 +5,17 @@
   right: 0vw;
   bottom: 0;
   width: 20vw;
-  padding: 20px;
+  padding: 1vw;
   background-color: #7ec6be;
   font-family: Arial, sans-serif;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.info-item.active {
-  background-color: #e04a54;
+  transition: all 0.3s linear;
 }
 
 .info-panel h2 {
-  margin-bottom: 100px;
-  font-size: 18px;
+  margin-bottom: 5vw;
+  font-size: 1.8vw;
   color: black;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
   text-align: center;
@@ -38,6 +35,11 @@
   margin: 0 auto 30px;
   display: block;
 }
+
+.info-panel.hidden {
+  right: -20vw;
+}
+
 .Toolbar_container {
   font-family: Arial, sans-serif;
   /* margin-left: 10px; Căn lề trái */
@@ -52,6 +54,11 @@
   right: 22vw; /* Đặt thanh công cụ ngay bên cạnh panel info */
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+  transition: all 0.3s linear;
+}
+
+.Toolbar_container.hidden {
+  right: 0;
 }
 
 .toolbarButton {
