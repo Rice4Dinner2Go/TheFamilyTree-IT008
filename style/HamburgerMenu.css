@@ -1,34 +1,37 @@
 .sidebar {
   position: fixed;
-  left: -250px;
+  left: -30vh;
   top: 0;
   height: 100%;
-  width: 250px;
+  width: 30vh;
   background-color: #7ec6be;
-  transition: 0.4s;
-  padding-top: 60px;
+  /* Hiện đang có 1 vài vấn đề nên tạm ko dùng hiệu ứng
+  transition: left 0.4s; */
+  padding-top: 5vh;
   border-radius: 10px;
 }
 
 .hamburger {
   position: absolute;
   top: 50%;
-  right: -65px; /* Position it outside the sidebar */
+  right: -8vh; /* Position it outside the sidebar */
   transform: translateY(-50%);
   cursor: pointer;
   z-index: 100;
-  padding: 10px;
+  padding: 1vh;
   background-color: #7ec6be;
   border-radius: 5px;
 }
 
 .hamburger div {
-  width: 40px;
-  height: 5px;
+  width: 4vh;
+  height: 0.4vh;
   border-radius: 5px;
   background: #333;
-  margin: 6px 0;
-  transition: 0.4s;
+  margin: 0.8vh 0.1vh;
+  
+  /* Hiện đang có 1 vài vấn đề nên tạm ko dùng hiệu ứng
+  transition: transform 0.4s, opacity 0.4s; */
 }
 
 .sidebar.active {
@@ -41,10 +44,10 @@
   font-weight: bolder;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode";
-  padding: 16px;
+  padding: 2vh;
   text-decoration: none;
-  font-size: 18px;
-  transition: 0.3s;
+  font-size: 2vh;
+  transition: background 0.3s;
 }
 
 .sidebar a:hover {
@@ -53,7 +56,7 @@
 
 /* Hamburger animation */
 .hamburger.active div:nth-child(1) {
-  transform: rotate(-45deg) translate(-8px, 8px);
+  transform: rotate(-45deg) translate(-0.88vh, 0.88vh);
 }
 
 .hamburger.active div:nth-child(2) {
@@ -61,13 +64,13 @@
 }
 
 .hamburger.active div:nth-child(3) {
-  transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-0.88vh, -0.88vh);
 }
 
-.content {
+/* .content {
   padding: 20px;
   margin-left: 60px;
-}
+} */
 
 /* Popup style */
 .popup {
@@ -187,7 +190,7 @@
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: hover  0.2s;
 }
 
 .overlay {
