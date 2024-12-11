@@ -1,20 +1,18 @@
-function autoClick() {
-  $("#download").click();
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const downloadButton = document.getElementById("download");
+  const element = document.getElementById("familyTree");
 
-$(document).ready(function () {
-  var element = $("#familyTree");
+  downloadButton.addEventListener("click", async () => {
+    // Sử dụng html2canvas để chụp phần tử
+    html2canvas(element).then((canvas) => {
+      // Chuyển canvas thành hình ảnh PNG
+      const imageData = canvas.toDataURL("image/png");
 
-  $("#download").on("click", function () {
-    html2canvas(element, {
-      onrendered: function (canvas) {
-        var imageData = canvas.toDataURL("image/jpg");
-        var newData = imageData.replace(
-          /^data:image\/jpg/,
-          "data:application/octet-stream"
-        );
-        $("#download").attr("download", "image.jpg").attr("href", newData);
-      },
+      // Tạo link tải
+      const link = document.createElement("a");
+      link.download = "family_tree.png";
+      link.href = imageData;
+      link.click();
     });
   });
 });
