@@ -2,46 +2,50 @@
 .info-panel {
   position: fixed;
   top: 0;
-  right: 0vw;
+  right: 0;
   bottom: 0;
   width: 20vw;
-  padding: 20px;
+  padding: 1vw;
   background-color: #7ec6be;
   font-family: Arial, sans-serif;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.info-item.active {
-  background-color: #e04a54;
+  /* Hiện đang có 1 vài vấn đề nên tạm ko dùng hiệu ứng
+  transition: right 0.3s linear; */
 }
 
 .info-panel h2 {
-  margin-bottom: 100px;
-  font-size: 18px;
+  margin-bottom: 5vw;
+  font-size: 1.8vw;
   color: black;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
   text-align: center;
 }
 
 .info-item {
-  margin-bottom: 20px;
+  margin-bottom: 4vh;
   color: black;
-  font-size: 16px;
+  font-size: 2vh;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
 .info-panel img {
-  width: 125px;
-  height: 125px;
+  width: 16vh;
+  height: 16vh;
   border-radius: 50%;
-  margin: 0 auto 30px;
+  margin: 0 auto 3vh;
   display: block;
 }
+
+.info-panel.hidden {
+  right: -22vw;
+}
+
 .Toolbar_container {
+  position: fixed;
   font-family: Arial, sans-serif;
   /* margin-left: 10px; Căn lề trái */
-  padding: 10px;
+  padding: 1vh;
   background-color:  #7AB2B2;
   display: flex;
   flex-direction: column; /* Căn chỉnh các button theo chiều dọc */
@@ -49,21 +53,27 @@
   position: fixed; /* Giữ thanh công cụ cố định khi cuộn trang */
   top: 0; /* Đặt thanh công cụ từ đầu trang */
   bottom: 0;
-  right: 22vw; /* Đặt thanh công cụ ngay bên cạnh panel info */
+  right: 21vw; /* Đặt thanh công cụ ngay bên cạnh panel info */
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+  /* Hiện đang có 1 vài vấn đề nên tạm ko dùng hiệu ứng
+  transition: translate 0.3s linear; */
+}
+
+.Toolbar_container.hidden {
+  translate: 21vw;
 }
 
 .toolbarButton {
-  font-size: 30px;
+  /* font-size: 30px; */
   font-weight: bold;
   background-color: #caf9f3;
   color: #fff;
   border: none;
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  margin-bottom: 10px; /* Thêm khoảng cách giữa các button */
+  width: 7vh;
+  height: 7vh;
+  margin-bottom: 1.5vh; /* Thêm khoảng cách giữa các button */
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -77,7 +87,7 @@
 .dialog {
   position: fixed;
   top: 0;
-  right: 30px;
+  right: 3vh;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
@@ -178,7 +188,7 @@ select:focus {
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: hover 0.2s;
 }
 
 .create-btn {

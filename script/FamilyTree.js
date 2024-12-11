@@ -153,12 +153,12 @@ async function drawFamilyTree() {
     const people = await loadFamilyData();
     const treeContainer = document.getElementById('familyTree');
     
-    // 
-    //
-    // Chỗ này để chon cá nhân làm 'root'
-    //
-    //                               root
-    const root = findPerson(people, 'P001');
+    // ////////////////////////////////////////////////////     /////
+    ///////////////////////////////////////////////////////    ///
+    // Chỗ này để chon cá nhân làm 'root'     /////////////  /////////////////
+    //                                        /////////////  //////////////////
+    //                               root     /////////////    ///
+    const root = findPerson(people, 'P001');  /////////////     //////
     
     // Layer -1: Ông bà (Cha mẹ của root)
     const parentsLayer = document.createElement('div');
