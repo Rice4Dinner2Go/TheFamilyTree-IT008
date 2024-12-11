@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PNG</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+    <style>
+      #download {
+        position: fixed;
+        bottom: 10%;
+        left: 45%;
+        font-size: 1.5rem;
+        color: rgb(0, 0, 0);
+        font-family: Georgia, Times, "Times New Roman", serif;
+        background-color: aqua;
+        border-radius: 10px;
+        padding: 10px;
+        text-decoration: none;
+      }
+      #download:hover {
+        background-color: rgb(47, 206, 206);
+      }
+    </style>
+    <link rel="stylesheet" href="./style/FamilyTree.css" />
+  </head>
+  <body>
+    <div
+      class="tree"
+      id="familyTree"
+      style="position: absolute; top: 20%; left: 5%"
+    ></div>
+    <a id="download">Download <i class="ri-download-cloud-2-line"></i></a>
+    <script src="./script/FamilyTree.js"></script>
+    <script src="./script/png.js"></script>
+  </body>
+</html>

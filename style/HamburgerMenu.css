@@ -29,7 +29,7 @@
   border-radius: 5px;
   background: #333;
   margin: 0.8vh 0.1vh;
-  
+
   /* Hiện đang có 1 vài vấn đề nên tạm ko dùng hiệu ứng
   transition: transform 0.4s, opacity 0.4s; */
 }
@@ -138,8 +138,8 @@
 
 .popup.input:focus,
 .popup.select:focus {
-    border-color: rgb(126, 198, 190);
-    outline: none;
+  border-color: rgb(126, 198, 190);
+  outline: none;
 }
 
 /* Nút Cancel */
@@ -154,14 +154,14 @@
 #cancelCheckRelationshipBtn:hover,
 #cancelSettingsBtn:hover {
   background: #e04a54; /* Hover */
-  transform: translateY(-3px)
+  transform: translateY(-3px);
 }
 
 /* Nút Action (Enter, Apply, Check) */
 #createTreeBtn,
 #checkRelationshipBtnPopup,
 #applySettingsBtn {
-  background:#28a745;
+  background: #28a745;
   color: white;
 }
 
@@ -190,9 +190,37 @@
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
-  transition: hover  0.2s;
+  transition: hover 0.2s;
 }
-
+/*button download PNG*/
+#download-popup {
+  display: none; /* Được thay đổi thành block khi hiển thị */
+  position: absolute;
+  animation: slideDown 0.5s ease-out;
+  top: 40px;
+  left: 60px;
+  width: 90%;
+  height: 90%;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+#popupIframe {
+  width: 100%;
+  height: 100%;
+}
+.download-popup button {
+  border: none;
+  background-color: rgb(255, 255, 255);
+  font-size: 1rem;
+  color: #111d68;
+  background-color: aqua;
+  padding: 5px;
+  border-radius: 5px;
+}
+.download-popup button:hover {
+  background-color: rgb(47, 206, 206);
+}
 .overlay {
   display: none; /* Ẩn overlay khi popup chưa hiển thị */
   position: fixed;
