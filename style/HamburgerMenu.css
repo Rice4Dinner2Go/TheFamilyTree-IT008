@@ -51,7 +51,7 @@
 }
 
 .sidebar a:hover {
-  background: rgb(107, 164, 175);
+  background: #6ba4af;
 }
 
 /* Hamburger animation */
@@ -193,16 +193,16 @@
   transition: hover 0.2s;
 }
 /*button download PNG*/
-#download-popup {
+.download-popup {
   display: none; /* Được thay đổi thành block khi hiển thị */
   position: absolute;
   animation: slideDown 0.5s ease-out;
-  top: 40px;
-  left: 60px;
+  top: 5%;
+  left: 5%;
   width: 90%;
   height: 90%;
   background-color: rgb(255, 255, 255);
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); */
   z-index: 1000;
 }
 #popupIframe {
@@ -210,16 +210,19 @@
   height: 100%;
 }
 .download-popup button {
+  font-family: Georgia, Times, "Times New Roman", serif;
+  position: fixed;
   border: none;
   background-color: rgb(255, 255, 255);
-  font-size: 1rem;
+  font-size: 4vh;
   color: #111d68;
-  background-color: aqua;
-  padding: 5px;
-  border-radius: 5px;
+  background-color: #7ec6be;
+  padding: 1vh;
+  border-radius: 1vh;
+  z-index: 1002;
 }
 .download-popup button:hover {
-  background-color: rgb(47, 206, 206);
+  background-color: #6ba4af;
 }
 .overlay {
   display: none; /* Ẩn overlay khi popup chưa hiển thị */
