@@ -1,6 +1,16 @@
 const addButton = document.getElementById("addButton");
 const dialog = document.getElementById("dialog");
 const cancelButton = document.getElementById("cancelButton");
+const infoButton = document.getElementById("infoButton");
+const panel = document.querySelector(".info-panel");
+const toolbar = document.querySelector(".Toolbar_container");
+
+// Ẩn hiện panel
+infoButton.addEventListener("click", () => {
+  console.log("hit info button");
+  panel.classList.toggle("hidden");
+  toolbar.classList.toggle("hidden");
+});
 
 addButton.addEventListener("click", () => {
   dialog.classList.remove("hidden");
@@ -77,8 +87,3 @@ editForm.addEventListener("submit", (e) => {
   // Đóng hộp thoại
   editDialog.classList.add("hidden");
 });
-
-function togglePanel(){
-  const infoPanel = document.getElementById("info-panel");
-  infoPanel.classList.toggle("active");
-}
