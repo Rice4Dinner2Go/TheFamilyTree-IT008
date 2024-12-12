@@ -2,15 +2,7 @@
 <html>
   <head>
     <title>Family Tree</title>
-    <link rel="icon" type="image/x-icon" href="/img/icon.ico" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="style/style.css" />
     <link rel="stylesheet" href="style/canvas.css" />
     <link rel="stylesheet" href="style/HamburgerMenu.css" />
@@ -24,12 +16,11 @@
     <div class="canvas-container">
       <div class="draggable-canvas">
         <!-- Những gì viết trong đây khi kéo thả nền thì sẽ đi theo -->
+        <h1 style="position: absolute; left: 1500px; top: 600px">
+          Try dragging the background 
+        </h1>
 
-        <div
-          class="tree"
-          id="familyTree"
-          style="position: absolute; top: 40%; left: 36%"
-        ></div>
+        <div class="tree" id="familyTree" style="position: absolute; top: 40%; left: 36%"></div>
 
         <!-- Hết -->
       </div>
@@ -44,97 +35,14 @@
           <div></div>
           <div></div>
         </div>
-        <a href="#" id="newTreeBtn">
-          <span
-            class="material-icons"
-            style="
-              font-weight: bold;
-              font-size: 5vh;
-              color: black;
-              position: abolute;
-            "
-            >account_tree</span
-          >
-          <div>Make a new tree</div>
-        </a>
-        <a href="#">
-          <span
-            class="material-icons"
-            style="
-              font-weight: bold;
-              font-size: 5vh;
-              color: black;
-              position: abolute;
-            "
-            >upload</span
-          >
-          <div>Upload a tree</div>
-        </a>
-        <a href="#" id="checkRelationshipBtn">
-          <span
-            class="material-icons"
-            style="
-              font-weight: bold;
-              font-size: 5vh;
-              color: black;
-              position: abolute;
-            "
-            >diversity_3</span
-          >
-          <div>Check relationship</div>
-        </a>
-        <a href="#" id="interfaceSettingsBtn">
-          <span
-            class="material-icons"
-            style="
-              font-weight: bold;
-              font-size: 5vh;
-              color: black;
-              position: abolute;
-            "
-            >settings</span
-          >
-          <div>Interface settings</div>
-        </a>
-        <a href="#" id="captureTreeBtn">
-          <span
-            class="material-icons"
-            style="
-              font-weight: bold;
-              font-size: 5vh;
-              color: black;
-              position: abolute;
-            "
-            >photo_camera</span
-          >
-          <div>Capture the family tree</div>
-        </a>
-        <a href="#" onclick="goToPage('main')">
-          <span
-            class="material-icons"
-            style="
-              font-weight: bold;
-              font-size: 5vh;
-              color: black;
-              transform: rotateZ(180deg);
-              position: abolute;
-            "
-            >logout</span
-          >
-          <div>Quit</div>
-        </a>
+        <a href="#" id="newTreeBtn">Make a new tree</a>
+        <a href="#">Upload a tree</a>
+        <a href="#" id="checkRelationshipBtn">Check relationship</a>
+        <a href="#" id="interfaceSettingsBtn">Interface settings</a>
+        <a href="#" id="captureTreeBtn">Capture the family tree</a>
+        <a href="#" onclick="goToPage('main')">Quit</a>
       </nav>
-      <div id="overlay" class="overlay" onclick="closePopup()"></div>
-      <!--Popup png.html for downloading PNG image-->
-      <div class="download-popup" id="download-popup">
-        <iframe src="" id="popupIframe"></iframe>
-        <button
-          onclick="closePopup()"
-          style="position: absolute; top: 82.5%; right: 57%"
-        >
-          Exit<i class="ri-arrow-right-line"></i>
-        </button>
-      </div>
+      <div id="overlay" class="overlay"></div>
       <!-- Popup: Make a new tree -->
       <div id="newTreePopup" class="popup" style="display: none">
         <h3>Create a New Family Tree</h3>
@@ -150,8 +58,8 @@
           <option value="female">Female</option></select
         ><br /><br />
         <div class="menu-widgets-buttons">
-          <button id="cancelNewTreeBtn">Cancel</button>
-          <button id="createTreeBtn">Enter</button>
+        <button id="cancelNewTreeBtn">Cancel</button>
+        <button id="createTreeBtn">Enter</button>
         </div>
       </div>
 
@@ -205,11 +113,11 @@
     <h1 style="position: fixed; left: 700px; top: 100px">
       Test Family Tree title
     </h1>
-    <!-- Search box
+    <!--Search box -->
     <div class="Searchbox_container">
       <input type="text" placeholder="Vui lòng nhập tên..." />
       <div class="search"></div>
-    </div> -->
+    </div>
     <!--Panel bên phải-->
     <div class="information-panel">
       <div class="info-panel">
@@ -230,41 +138,11 @@
       </div>
       <!-- Hết -->
       <div class="Toolbar_container">
-        <button id="searchButton" class="toolbarButton">
-          <span
-            class="material-icons"
-            style="font-weight: bold; font-size: 4.2vh; color: #7ec6be"
-            >search</span
-          >
-        </button>
-        <button id="addButton" class="toolbarButton">
-          <span
-            class="material-icons"
-            style="font-weight: bold; font-size: 5vh; color: #7ec6be"
-            >add</span
-          >
-        </button>
-        <button id="editButton" class="toolbarButton">
-          <span
-            class="material-icons"
-            style="font-weight: lighter; font-size: 4vh; color: #7ec6be"
-            >edit</span
-          >
-        </button>
-        <button id="deleteButton" class="toolbarButton">
-          <span
-            class="material-icons"
-            style="font-weight: lighter; font-size: 4.5vh; color: #7ec6be"
-            >delete</span
-          >
-        </button>
-        <button id="infoButton" class="toolbarButton">
-          <span
-            class="material-icons"
-            style="font-weight: lighter; font-size: 4.5vh; color: #7ec6be"
-            >info</span
-          >
-        </button>
+        <button id="searchButton" class="toolbarButton"><span class="material-icons" style="font-weight: bold;font-size: 40px; color: #7ec6be">search</span></button> 
+        <button id="addButton" class="toolbarButton"><span class="material-icons" style="font-weight: bold;font-size: 55px; color: #7ec6be">add</span></button>
+        <button id="editButton" class="toolbarButton"><span class="material-icons" style="font-weight: lighter;font-size: 40px; color: #7ec6be">edit</span></button>
+        <button id="deleteButton" class="toolbarButton"><span class="material-icons" style="font-weight: lighter;font-size: 40px; color: #7ec6be">delete</span></button>
+        <button id="infoButton" class="toolbarButton"><span class="material-icons" style="font-weight: lighter;font-size: 40px; color: #7ec6be">info</span></button>
       </div>
       <!-- Hộp thoại thêm thành viên -->
       <div id="dialog" class="dialog hidden">
@@ -324,11 +202,7 @@
               </label>
               <label>
                 Date of birth:
-                <input
-                  type="date"
-                  name="dateOfBirth"
-                  placeholder="Enter date"
-                />
+                <input type="date" name="dateOfBirth" placeholder="Enter date" />
               </label>
             </div>
             <div class="dialog-actions">
