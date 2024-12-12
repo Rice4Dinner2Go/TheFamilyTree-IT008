@@ -152,18 +152,11 @@ function drawConnections(container, people, root, partner, children) {
 }
 // Hàm cập nhật thông tin trong panel bên phải
 function updateInfoPanel(person) {
-    const infoPanel = document.getElementById("info-panel");
-    if(infoPanel){
-        infoPanel.innerHTML = `
-        <h2>Thông tin chi tiết</h2>
-        <p><strong>Tên:</strong> ${person.name}</p>
-        <p><strong>Tuổi:</strong> ${person.age} tuổi</p>
-        <p><strong>Ngày sinh:</strong> ${person.birthday || "Không rõ"}</p>
-        <p><strong>Giới tính:</strong> ${person.gender === "Male" ? "Nam" : "Nữ"}</p>
-        <p><strong>Quan hệ:</strong> ${person.relation || "Không rõ"}</p>
-        `;
-    }
-  }
+    document.getElementById('info-name').textContent = person.name;
+    document.getElementById('info-age').textContent = person.age;
+    document.getElementById('info-birthday').textContent = person.dateOfBirth || "Unknown";
+    document.getElementById('info-gender').textContent = person.gender === "Male" ? "Male" : "Female";
+}
   // Hàm để xử lý khi người dùng click vào một cá nhân
 function handlePersonClick(personId) {
 rootId = personId;
