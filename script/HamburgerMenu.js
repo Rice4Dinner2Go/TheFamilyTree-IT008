@@ -52,25 +52,3 @@ document.addEventListener("DOMContentLoaded", () => {
     "cancelSettingsBtn"
   );
 });
-//Js for download-popup
-document
-  .getElementById("captureTreeBtn")
-  .addEventListener("click", function (e) {
-    e.preventDefault();
-    // Set iframe source to png.html
-    const iframe = document.getElementById("popupIframe");
-    iframe.src = "./png.html";
-    // Show popup and overlay
-    document.getElementById("download-popup").style.display = "block";
-    document.getElementById("overlay").style.display = "block";
-  });
-
-// Close popup
-function closePopup() {
-  document.getElementById("download-popup").style.display = "none";
-  document.getElementById("overlay").style.display = "none";
-
-  // Clear iframe source
-  const iframe = document.getElementById("popupIframe");
-  iframe.src = "";
-}

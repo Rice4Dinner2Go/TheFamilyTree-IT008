@@ -179,7 +179,12 @@ async function drawFamilyTree() {
 
   // Cập nhật thông tin trong panel
   updateInfoPanel(root);
-
+   // ////////////////////////////////////////////////////     /////
+    ///////////////////////////////////////////////////////    ///
+    // Chỗ này để chon cá nhân làm 'root'     /////////////  /////////////////
+    //                                        /////////////  //////////////////
+    //                               root     /////////////    ///
+    // const root = findPerson(people, 'P002');  /////////////     //////
 
     
     // Layer -1: Ông bà (Cha mẹ của root)
