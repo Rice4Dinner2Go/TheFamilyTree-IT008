@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PNG</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style/canvas.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+      html, body {margin: 0; height: 100%; overflow: hidden}
+      #download {
+        position: absolute;
+        bottom: 10%;
+        left: 45%;
+        font-size: 4vh;
+        color: rgb(0, 0, 0);
+        font-family: Georgia, Times, "Times New Roman", serif;
+        background-color: #7ec6be;
+        border-radius: 1vh;
+        padding: 2vh;
+        text-decoration: none;
+        z-index: 1002;
+      }
+      #download:hover {
+        background-color: #6ba4af;
+      }
+    </style>
+    <link rel="stylesheet" href="./style/FamilyTree.css" />
+  </head>
+  <body>
+    <div class="canvas-container">
+      <div class="draggable-canvas" style="height: 100%; width: 100%; left: auto; top: -8%;">
+        <div
+          class="tree"
+          id="familyTree"
+          style="position: absolute;top: 40%; left: 36%"
+        ></div>
+      </div>
+    </div>
+    <a id="download">Download <i class="ri-download-cloud-2-line"></i></a>
+
+    <script src="./script/FamilyTree.js"></script>
+    <script src="./script/png.js"></script>
+    <script src="script/canvas.js"></script>
+  </body>
+</html>
