@@ -17,14 +17,11 @@
     <link rel="stylesheet" href="style/PageTransition.css" />
     <link rel="stylesheet" href="style/FamilyTree.css" />
     <link rel="stylesheet" href="style/InformationPanel.css" />
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="script/api.js"></script>
   </head>
   <body>
     <div class="canvas-container">
       <div class="draggable-canvas">
         <!-- Những gì viết trong đây khi kéo thả nền thì sẽ đi theo -->
-
         <div
           class="tree"
           id="familyTree"
@@ -386,10 +383,12 @@
       </div>
     </div>
     <!-- Hết -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script/canvas.js"></script>
     <script src="script/HamburgerMenu.js"></script>
     <script src="script/PageTransition.js"></script>
-    <script src="script/FamilyTree.js"></script>
-    <script src="script/information_panel.js"></script>
+    <script type="module" src="script/FamilyTree.js"></script>
+    <script type="module" src="script/information_panel.js"></script>
+    <script type="module" src="script/deletedata.js"></script>
   </body>
 </html>
