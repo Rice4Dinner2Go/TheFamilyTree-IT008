@@ -1,0 +1,128 @@
+[
+    {
+        "name": "John Smith",
+        "gender": "Male",
+        "dateOfBirth": "1960-05-15",
+        "age": 63,
+        "partnerId": "",
+        "parentsIds": [],
+        "childrenIds": []
+    },
+    {
+        "name": "Mary Smith",
+        "gender": "Female",
+        "dateOfBirth": "1962-08-22",
+        "age": 61,
+        "partnerId": "",
+        "parentsIds": [],
+        "childrenIds": []
+    },
+    {
+        "name": "Robert Smith",
+        "gender": "Male",
+        "dateOfBirth": "1935-03-10",
+        "age": 88,
+        "partnerId": "",
+        "parentsIds": [],
+        "childrenIds": []
+    },
+    {
+        "name": "Patricia Smith",
+        "gender": "Female",
+        "dateOfBirth": "1938-11-28",
+        "age": 85,
+        "partnerId": "",
+        "parentsIds": [],
+        "childrenIds": []
+    },
+    {
+        "name": "Michael Smith",
+        "gender": "Male",
+        "dateOfBirth": "1990-02-14",
+        "age": 33,
+        "partnerId": "",
+        "parentsIds": [],
+        "childrenIds": []
+    },
+    {
+        "name": "Sarah Johnson",
+        "gender": "Female",
+        "dateOfBirth": "1992-07-30",
+        "age": 31,
+        "partnerId": "",
+        "parentsIds": [],
+        "childrenIds": []
+    },
+    {
+        "name": "David Smith",
+        "gender": "Male",
+        "dateOfBirth": "1994-12-05",
+        "age": 29,
+        "partnerId": "",
+        "parentsIds": [],
+        "childrenIds": []
+    },
+    {
+        "name": "William Johnson",
+        "gender": "Male",
+        "dateOfBirth": "1940-06-18",
+        "age": 83,
+        "partnerId": "",
+        "parentsIds": [],
+        "childrenIds": []
+    },
+    {
+        "name": "Elizabeth Johnson",
+        "gender": "Female",
+        "dateOfBirth": "1942-09-25",
+        "age": 81,
+        "partnerId": "",
+        "parentsIds": [],
+        "childrenIds": []
+    },
+    {
+        "name": "Thomas Smith",
+        "gender": "Male",
+        "dateOfBirth": "1962-04-12",
+        "age": 61,
+        "partnerId": "",
+        "parentsIds": [],
+        "childrenIds": []
+    },
+    {
+        "name": "Jane Wilson",
+        "gender": "Female",
+        "dateOfBirth": "1964-11-03",
+        "age": 59,
+        "partnerId": "",
+        "parentsIds": [],
+        "childrenIds": []
+    },
+    {
+        "name": "Emma Davis",
+        "gender": "Female",
+        "dateOfBirth": "1991-08-20",
+        "age": 32,
+        "partnerId": "",
+        "parentsIds": [],
+        "childrenIds": []
+    },
+    {
+        "name": "Oliver Smith",
+        "gender": "Male",
+        "dateOfBirth": "2018-03-12",
+        "age": 5,
+        "partnerId": "",
+        "parentsIds": [],
+        "childrenIds": []
+    },
+    {
+        "name": "Sophia Smith",
+        "gender": "Female",
+        "dateOfBirth": "2020-07-25",
+        "age": 3,
+        "partnerId": "",
+        "parentsIds": [],
+        "childrenIds": []
+    }
+]
