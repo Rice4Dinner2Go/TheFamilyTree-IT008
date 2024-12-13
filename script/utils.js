@@ -226,3 +226,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+export {
+    isDataAvailable,
+    findWithName,
+    addPartnersRelationship,
+    addParentChildRelationship,
+    createMultiplePersons,
+};
