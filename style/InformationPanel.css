@@ -8,8 +8,8 @@
   padding: 1vw;
   background-color: #7ec6be;
   font-family: Arial, sans-serif;
-  text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
   /* Hiện đang có 1 vài vấn đề nên tạm ko dùng hiệu ứng
   transition: right 0.3s linear; */
 }

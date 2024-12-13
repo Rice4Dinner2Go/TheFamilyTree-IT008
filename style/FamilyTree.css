@@ -20,6 +20,7 @@
     flex-direction: column;
     justify-content: center;
     position: relative;
+    cursor: pointer;
     z-index: 2;
 }
 .person.male {
