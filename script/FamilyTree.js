@@ -1,9 +1,11 @@
 // Chương trình vẽ cây gia phả, theo dữ liệu từ file data.json
+var rootId = "P001";
 
 async function loadFamilyData() {
     try {
         const response = await fetch('../log/data.json');
         const data = await response.json();
+        console.log(rootId);
         return data.people;
     } catch (error) {
         console.error('Error loading data.json:', error);
@@ -148,17 +150,35 @@ function drawConnections(container, people, root, partner, children) {
     connectionsDiv.appendChild(svg);
     return connectionsDiv;
 }
+// Hàm cập nhật thông tin trong panel bên phải
+function updateInfoPanel(person) {
+    document.getElementById('info-name').textContent = person.name;
+    document.getElementById('info-age').textContent = person.age;
+    document.getElementById('info-birthday').textContent = person.dateOfBirth || "Unknown";
+    document.getElementById('info-gender').textContent = person.gender === "Male" ? "Male" : "Female";
+}
+  // Hàm để xử lý khi người dùng click vào một cá nhân
+function handlePersonClick(personId) {
+rootId = personId;
+drawFamilyTree();
+}
 
+// Hàm vẽ cây gia phả với root mới
 async function drawFamilyTree() {
     const people = await loadFamilyData();
     const treeContainer = document.getElementById('familyTree');
-    
-    // ////////////////////////////////////////////////////     /////
-    ///////////////////////////////////////////////////////    ///
-    // Chỗ này để chon cá nhân làm 'root'     /////////////  /////////////////
-    //                                        /////////////  //////////////////
-    //                               root     /////////////    ///
-    const root = findPerson(people, 'P002');  /////////////     //////
+    treeContainer.innerHTML = ""; // Xóa cây cũ
+
+  const root = findPerson(people, rootId);
+  if (!root) {
+    console.error("Không tìm thấy người làm gốc với ID:", rootId);
+    return;
+  }
+
+  // Cập nhật thông tin trong panel
+  updateInfoPanel(root);
+
+
     
     // Layer -1: Ông bà (Cha mẹ của root)
     const parentsLayer = document.createElement('div');
@@ -166,7 +186,9 @@ async function drawFamilyTree() {
     root.parentsIds.forEach(parentId => {
         const parent = findPerson(people, parentId);
         if (parent) {
-            parentsLayer.appendChild(createPersonElement(parent));
+            const parentEl = createPersonElement(parent);
+            parentEl.addEventListener("click", () => handlePersonClick(parent.id));
+            parentsLayer.appendChild(parentEl);
         }
     });
     
@@ -189,17 +211,27 @@ async function drawFamilyTree() {
         if (partner) {
             // nều ng đó là nữ, có chồng, thì cẽ chồng trước
             if (person.gender === 'Female' && partner.gender === 'Male') {
-                currentLayer.appendChild(createPersonElement(partner));
-                currentLayer.appendChild(createPersonElement(person, isRoot));
+                const partnerEl = createPersonElement(partner);
+                const personEl = createPersonElement(person, isRoot);
+                currentLayer.appendChild(partnerEl);
+                currentLayer.appendChild(personEl);
+                partnerEl.addEventListener("click", () => handlePersonClick(partner.id));
+                personEl.addEventListener("click", () => handlePersonClick(person.id));
             }
             // nếu ng đó là nam, có vợ, thì vẽ ng đó trước
             else {
-                currentLayer.appendChild(createPersonElement(person, isRoot));
-                currentLayer.appendChild(createPersonElement(partner));
+                const personEl = createPersonElement(person, isRoot);
+                const partnerEl = createPersonElement(partner);
+                currentLayer.appendChild(personEl);
+                currentLayer.appendChild(partnerEl);
+                personEl.addEventListener("click", () => handlePersonClick(person.id));
+                partnerEl.addEventListener("click", () => handlePersonClick(partner.id));
             }
         } else {
             // ng đó ko có vợ/chồng
-            currentLayer.appendChild(createPersonElement(person, isRoot));
+            const personEl = createPersonElement(person, isRoot);
+            currentLayer.appendChild(personEl);
+            personEl.addEventListener("click", () => handlePersonClick(person.id));
         }
     }
 
@@ -215,7 +247,9 @@ async function drawFamilyTree() {
         person.parentsIds.includes(root.id)
     );
     children.forEach(child => {
-        childrenLayer.appendChild(createPersonElement(child));
+        const childEl = createPersonElement(child);
+        childEl.addEventListener("click", () => handlePersonClick(child.id));
+        childrenLayer.appendChild(childEl);
     });
     
     // Vẽ các layer
@@ -232,4 +266,4 @@ async function drawFamilyTree() {
     treeContainer.appendChild(connections);
 }
 
-drawFamilyTree();
+drawFamilyTree(rootId);

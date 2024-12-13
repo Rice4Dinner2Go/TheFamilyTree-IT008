@@ -25,7 +25,6 @@
     <div class="canvas-container">
       <div class="draggable-canvas">
         <!-- Những gì viết trong đây khi kéo thả nền thì sẽ đi theo -->
-
         <div
           class="tree"
           id="familyTree"
@@ -130,7 +129,7 @@
       <div class="download-popup" id="download-popup">
         <iframe src="" id="popupIframe"></iframe>
         <button
-          onclick="closePopup()"
+          id="closeCapturePopup"
           style="position: absolute; top: 82.5%; right: 57%"
         >
           Exit<i class="ri-arrow-right-line"></i>
@@ -194,6 +193,17 @@
           id="fontSize"
           placeholder="Font size in px"
         /><br /><br />
+        <div class="danger-zone" style="border-top: 1px solid #ccc; padding-top: 15px; margin-top: 15px;">
+          <h4 style="color: #ff5f6d;">Danger Zone</h4>
+          <button id="deleteAllDataBtn" style="background-color: #ff5f6d; color: white; padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer;">
+            Delete All Data
+          </button>
+          <div style="margin-top: 10px;">
+            <button id="debugBtn" style="background-color: #6c757d; color: white; padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer;">
+              Debug
+            </button>
+          </div>
+        </div>
         <div class="menu-widgets-buttons">
           <button id="cancelSettingsBtn">Cancel</button>
           <button id="applySettingsBtn">Apply</button>
@@ -217,16 +227,16 @@
         <img src="img/avatar.jpg" alt="avatar_image1" />
         <h2>PERSONAL INFORMATION</h2>
         <div class="info-item">
-          <strong>Full name:</strong> <span id="info-name"></span>
+          <strong>Full name:</strong><br><span id="info-name" style="font-style: italic; font-size: 24px;"></span>
         </div>
         <div class="info-item">
-          <strong>Age:</strong> <span id="info-age"></span>
+          <strong>Age:</strong><br><span id="info-age" style="font-style: italic; font-size: 24px;"></span>
         </div>
         <div class="info-item">
-          <strong>Date of Birth:</strong> <span id="info-birthday"></span>
+          <strong>Date of Birth:</strong><br><span id="info-birthday" style="font-style: italic; font-size: 24px;"></span>
         </div>
         <div class="info-item">
-          <strong>Gender:</strong> <span id="info-gender"></span>
+          <strong>Gender:</strong><br><span id="info-gender" style="font-style: italic; font-size: 24px;"></span>
         </div>
       </div>
       <!-- Hết -->
@@ -387,10 +397,12 @@
       </div>
     </div>
     <!-- Hết -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script/canvas.js"></script>
-    <script src="script/HamburgerMenu.js"></script>
     <script src="script/PageTransition.js"></script>
-    <script src="script/FamilyTree.js"></script>
-    <script src="script/information_panel.js"></script>
+    <script type="module" src="script/HamburgerMenu.js"></script>
+    <script type="module" src="script/FamilyTree.js"></script>
+    <script type="module" src="script/information_panel.js"></script>
+    <script type="module" src="script/utils.js"></script>
   </body>
 </html>

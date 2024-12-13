@@ -124,3 +124,4 @@ const api = {
 //     });
 
 // api.deletePerson("675a9f70ff624b7edf265ac4");
+export default api;
