@@ -35,10 +35,39 @@ async function delete_all_data()
     }
 }
 
+async function isDataAvailable() {
+    const data = await api.getAllPersons();
+    if(data[0]){
+        console.log("Data is available");
+        return true;
+    }
+    console.log("No data found");
+    return false
+}
+
+async function findWithName(name){
+    console.log("Begin to find person")
+    const data = await api.getAllPersons();
+    if(!data[0]){
+        console.log("No data found");
+        return "";
+    }
+    for (const person of data)
+    {
+        if (name === person.name)   {
+            console.log("found the name " + person.name +" with id "+ person.id);
+            return person.id;
+        }
+    }
+    console.log("No person with the name " + name);
+    return "";
+}
+
+//Cái hàm này để test funtion, vô page_tree.html, bấm vô setting rồi bấm nút 'debug' để chạy code
 async function test() {
     console.log("Testing delete functionality...");
     // Test function
-
+    
     //
     console.log("Test completed.");
 }
