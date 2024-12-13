@@ -2,11 +2,12 @@
 import api from "./api.js";
 
 var rootId = "0";
+var family;
 
 async function loadFamilyData() {
     try {
         const data = await api.getAllPersons();
-        if (rootId === "0"){
+        if (rootId === "0" && data.length > 0){
             rootId = data[0].id;
         }
         console.log(rootId);
@@ -169,7 +170,9 @@ drawFamilyTree();
 
 // Hàm vẽ cây gia phả với root mới
 async function drawFamilyTree() {
-    const people = await loadFamilyData();
+    if (!family){
+        family = await loadFamilyData();
+    }
     const treeContainer = document.getElementById('familyTree');
     treeContainer.innerHTML = ""; // Xóa cây cũ
 
@@ -234,7 +237,7 @@ async function drawFamilyTree() {
         }
 
         // Draw connections
-        const connections = drawConnections(treeContainer, people, root);
+        const connections = drawConnections(treeContainer, family, root);
         treeContainer.appendChild(connections);
     } catch (error) {
         console.error("Error drawing family tree:", error);
