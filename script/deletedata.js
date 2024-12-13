@@ -1,4 +1,5 @@
 import api from './api.js';
+
 async function delete_all_data()
 {
 
@@ -34,9 +35,20 @@ async function delete_all_data()
     }
 }
 
+async function test() {
+    console.log("Testing delete functionality...");
+    // Test function
 
+    //
+    console.log("Test completed.");
+}
+
+
+//Implementing as button in html
 document.addEventListener("DOMContentLoaded", () => {
     const deleteAllDataBtn = document.getElementById('deleteAllDataBtn');
+    const debugBtn = document.getElementById('debugBtn');
+
     if (deleteAllDataBtn) {
         deleteAllDataBtn.addEventListener('click', async () => {
             if (confirm('WARNING: This will permanently delete all your family tree data. This action cannot be undone. Are you sure you want to proceed?')) {
@@ -53,6 +65,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     alert('Error deleting data: ' + error.message);
                 }
             }
+        });
+    }
+
+    if (debugBtn) {
+        debugBtn.addEventListener('click', () => {
+            test();
         });
     }
 });
