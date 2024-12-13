@@ -36,10 +36,23 @@ async function delete_all_data()
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    const deleteButton = document.getElementById("confirmDeleteButton");
-    console.log("Loaded delete")
-    deleteButton.addEventListener("click", () => {
-        delete_all_data();
-        console.log("deleted");
-    });
+    const deleteAllDataBtn = document.getElementById('deleteAllDataBtn');
+    if (deleteAllDataBtn) {
+        deleteAllDataBtn.addEventListener('click', async () => {
+            if (confirm('WARNING: This will permanently delete all your family tree data. This action cannot be undone. Are you sure you want to proceed?')) {
+                try {
+                    await delete_all_data();
+                    // Close the settings popup
+                    document.getElementById('interfaceSettingsPopup').style.display = 'none';
+                    document.getElementById('overlay').style.display = 'none';
+                    // Show success message
+                    alert('All data has been successfully deleted.');
+                    // Reload the page to reset the application state
+                    window.location.href = "../index.html";
+                } catch (error) {
+                    alert('Error deleting data: ' + error.message);
+                }
+            }
+        });
+    }
 });

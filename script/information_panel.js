@@ -7,7 +7,6 @@ const toolbar = document.querySelector(".Toolbar_container");
 
 // Ẩn hiện panel
 infoButton.addEventListener("click", () => {
-  console.log("hit info button");
   panel.classList.toggle("hidden");
   toolbar.classList.toggle("hidden");
 });
