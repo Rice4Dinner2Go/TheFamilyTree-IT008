@@ -19,7 +19,11 @@ Cả cái chương trình này dùng để vẽ cái background mà nó di chuy�
     top: -50%;
     left: -50%;
     background-size: 20px 20px;
-    cursor: move;
+    /* cursor: move; */
     touch-action: none;
     z-index: 0;
+}
+
+.dragging {
+    cursor: move;
 }
