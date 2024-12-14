@@ -297,6 +297,47 @@ async function importPersons(data) {
     }
 }
 
+async function deletePerson(personId) 
+{
+    try {
+        // Lấy danh sách tất cả các person
+        const allPersons = await api.getAllPersons();
+
+        // Duyệt qua tất cả các person để xóa 
+        for (const person of allPersons) {
+            const updates = {};
+
+            // Kiểm tra và xóa partnerId nếu trùng với personId cần xóa
+            if (person.partnerId === personId) {
+                updates.partnerId = "";
+            }
+
+            // Kiểm tra và xóa parentIds nếu có chứa personId cần xóa
+            if (person.parentIds && person.parentIds.includes(personId)) {
+                updates.parentIds = person.parentIds.filter(id => id !== personId);
+            }
+
+            // Kiểm tra và xóa childrenIds nếu có chứa personId cần xóa
+            if (person.childrenIds && person.childrenIds.includes(personId)) {
+                updates.childrenIds = person.childrenIds.filter(id => id !== personId);
+            }
+
+            // Nếu có bất kỳ cập nhật nào, thực hiện cập nhật
+            if (Object.keys(updates).length > 0) {
+                await api.updatePerson(person._id, updates);
+            }
+        }
+
+        // Sau khi xóa các tham chiếu, xóa chính person đó
+        await api.deletePerson(personId);
+
+        console.log(`Person with ID ${personId} and related references deleted successfully.`);
+    } catch (error) {
+        console.error(`Error deleting person with ID ${personId}:`, error);
+        throw error;
+    }
+}
+
 //Cái hàm này để test funtion, vô page_tree.html, bấm vô setting rồi bấm nút 'debug' để chạy code
 async function test() {
     console.log("Starting import test...");
