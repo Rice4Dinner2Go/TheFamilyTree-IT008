@@ -5,324 +5,324 @@
             "gender": "Male",
             "dateOfBirth": "1960-05-15",
             "age": 63,
-            "partner": "Mary Smith",
+            "partnerId": "Mary Smith",
             "parentIds": ["Robert Smith", "Patricia Smith"],
-            "children": ["Michael Smith", "Sarah Johnson", "David Smith"]
+            "childrenIds": ["Michael Smith", "Sarah Johnson", "David Smith"]
         },
         {
             "name": "Mary Smith",
             "gender": "Female",
             "dateOfBirth": "1962-08-22",
             "age": 61,
-            "partner": "John Smith",
+            "partnerId": "John Smith",
             "parentIds": ["William Johnson", "Elizabeth Johnson"],
-            "children": ["Michael Smith", "Sarah Johnson", "David Smith"]
+            "childrenIds": ["Michael Smith", "Sarah Johnson", "David Smith"]
         },
         {
             "name": "Robert Smith",
             "gender": "Male",
             "dateOfBirth": "1935-03-10",
             "age": 88,
-            "partner": "Patricia Smith",
+            "partnerId": "Patricia Smith",
             "parentIds": [],
-            "children": ["John Smith", "Thomas Smith", "Jane Wilson"]
+            "childrenIds": ["John Smith", "Thomas Smith", "Jane Wilson"]
         },
         {
             "name": "Patricia Smith",
             "gender": "Female",
             "dateOfBirth": "1938-11-28",
             "age": 85,
-            "partner": "Robert Smith",
+            "partnerId": "Robert Smith",
             "parentIds": [],
-            "children": ["John Smith", "Thomas Smith", "Jane Wilson"]
+            "childrenIds": ["John Smith", "Thomas Smith", "Jane Wilson"]
         },
         {
             "name": "Michael Smith",
             "gender": "Male",
             "dateOfBirth": "1990-02-14",
             "age": 33,
-            "partner": "Emma Davis",
+            "partnerId": "Emma Davis",
             "parentIds": ["John Smith", "Mary Smith"],
-            "children": ["Oliver Smith", "Sophia Smith"]
+            "childrenIds": ["Oliver Smith", "Sophia Smith"]
         },
         {
             "name": "Sarah Johnson",
             "gender": "Female",
             "dateOfBirth": "1992-07-30",
             "age": 31,
-            "partner": "James Johnson",
+            "partnerId": "James Johnson",
             "parentIds": ["John Smith", "Mary Smith"],
-            "children": ["Liam Johnson"]
+            "childrenIds": ["Liam Johnson"]
         },
         {
             "name": "David Smith",
             "gender": "Male",
             "dateOfBirth": "1994-12-05",
             "age": 29,
-            "partner": "Ava Brown",
+            "partnerId": "Ava Brown",
             "parentIds": ["John Smith", "Mary Smith"],
-            "children": ["Lucas Smith", "Mia Smith"]
+            "childrenIds": ["Lucas Smith", "Mia Smith"]
         },
         {
             "name": "William Johnson",
             "gender": "Male",
             "dateOfBirth": "1940-06-18",
             "age": 83,
-            "partner": "Elizabeth Johnson",
+            "partnerId": "Elizabeth Johnson",
             "parentIds": [],
-            "children": ["Mary Smith", "Emily Taylor"]
+            "childrenIds": ["Mary Smith", "Emily Taylor"]
         },
         {
             "name": "Elizabeth Johnson",
             "gender": "Female",
             "dateOfBirth": "1942-09-25",
             "age": 81,
-            "partner": "William Johnson",
+            "partnerId": "William Johnson",
             "parentIds": [],
-            "children": ["Mary Smith", "Emily Taylor"]
+            "childrenIds": ["Mary Smith", "Emily Taylor"]
         },
         {
             "name": "Thomas Smith",
             "gender": "Male",
             "dateOfBirth": "1962-04-12",
             "age": 61,
-            "partner": "Sophie Anderson",
+            "partnerId": "Sophie Anderson",
             "parentIds": ["Robert Smith", "Patricia Smith"],
-            "children": ["Daniel Smith", "Isabella Smith"]
+            "childrenIds": ["Daniel Smith", "Isabella Smith"]
         },
         {
             "name": "Jane Wilson",
             "gender": "Female",
             "dateOfBirth": "1964-11-03",
             "age": 59,
-            "partner": "George Wilson",
+            "partnerId": "George Wilson",
             "parentIds": ["Robert Smith", "Patricia Smith"],
-            "children": ["Charlotte Wilson"]
+            "childrenIds": ["Charlotte Wilson"]
         },
         {
             "name": "Emma Davis",
             "gender": "Female",
             "dateOfBirth": "1991-08-20",
             "age": 32,
-            "partner": "Michael Smith",
+            "partnerId": "Michael Smith",
             "parentIds": [],
-            "children": ["Oliver Smith", "Sophia Smith"]
+            "childrenIds": ["Oliver Smith", "Sophia Smith"]
         },
         {
             "name": "Oliver Smith",
             "gender": "Male",
             "dateOfBirth": "2018-03-12",
             "age": 5,
-            "partner": "",
+            "partnerId": "",
             "parentIds": ["Michael Smith", "Emma Davis"],
-            "children": []
+            "childrenIds": []
         },
         {
             "name": "Sophia Smith",
             "gender": "Female",
             "dateOfBirth": "2020-07-25",
             "age": 3,
-            "partner": "",
+            "partnerId": "",
             "parentIds": ["Michael Smith", "Emma Davis"],
-            "children": []
+            "childrenIds": []
         },
         {
             "name": "James Johnson",
             "gender": "Male",
             "dateOfBirth": "1991-05-15",
             "age": 32,
-            "partner": "Sarah Johnson",
+            "partnerId": "Sarah Johnson",
             "parentIds": [],
-            "children": ["Liam Johnson"]
+            "childrenIds": ["Liam Johnson"]
         },
         {
             "name": "Liam Johnson",
             "gender": "Male",
             "dateOfBirth": "2019-10-08",
             "age": 4,
-            "partner": "",
+            "partnerId": "",
             "parentIds": ["Sarah Johnson", "James Johnson"],
-            "children": []
+            "childrenIds": []
         },
         {
             "name": "Ava Brown",
             "gender": "Female",
             "dateOfBirth": "1995-09-28",
             "age": 28,
-            "partner": "David Smith",
+            "partnerId": "David Smith",
             "parentIds": [],
-            "children": ["Lucas Smith", "Mia Smith"]
+            "childrenIds": ["Lucas Smith", "Mia Smith"]
         },
         {
             "name": "Lucas Smith",
             "gender": "Male",
             "dateOfBirth": "2021-02-14",
             "age": 2,
-            "partner": "",
+            "partnerId": "",
             "parentIds": ["David Smith", "Ava Brown"],
-            "children": []
+            "childrenIds": []
         },
         {
             "name": "Mia Smith",
             "gender": "Female",
             "dateOfBirth": "2023-01-30",
             "age": 0,
-            "partner": "",
+            "partnerId": "",
             "parentIds": ["David Smith", "Ava Brown"],
-            "children": []
+            "childrenIds": []
         },
         {
             "name": "Emily Taylor",
             "gender": "Female",
             "dateOfBirth": "1965-07-19",
             "age": 58,
-            "partner": "Henry Taylor",
+            "partnerId": "Henry Taylor",
             "parentIds": ["William Johnson", "Elizabeth Johnson"],
-            "children": ["William Taylor", "Grace Taylor"]
+            "childrenIds": ["William Taylor", "Grace Taylor"]
         },
         {
             "name": "Sophie Anderson",
             "gender": "Female",
             "dateOfBirth": "1963-12-08",
             "age": 60,
-            "partner": "Thomas Smith",
+            "partnerId": "Thomas Smith",
             "parentIds": [],
-            "children": ["Daniel Smith", "Isabella Smith"]
+            "childrenIds": ["Daniel Smith", "Isabella Smith"]
         },
         {
             "name": "Daniel Smith",
             "gender": "Male",
             "dateOfBirth": "1988-06-24",
             "age": 35,
-            "partner": "",
+            "partnerId": "",
             "parentIds": ["Thomas Smith", "Sophie Anderson"],
-            "children": []
+            "childrenIds": []
         },
         {
             "name": "Isabella Smith",
             "gender": "Female",
             "dateOfBirth": "1990-11-15",
             "age": 33,
-            "partner": "",
+            "partnerId": "",
             "parentIds": ["Thomas Smith", "Sophie Anderson"],
-            "children": []
+            "childrenIds": []
         },
         {
             "name": "George Wilson",
             "gender": "Male",
             "dateOfBirth": "1963-08-30",
             "age": 60,
-            "partner": "Jane Wilson",
+            "partnerId": "Jane Wilson",
             "parentIds": [],
-            "children": ["Charlotte Wilson"]
+            "childrenIds": ["Charlotte Wilson"]
         },
         {
             "name": "Charlotte Wilson",
             "gender": "Female",
             "dateOfBirth": "1989-04-17",
             "age": 34,
-            "partner": "",
+            "partnerId": "",
             "parentIds": ["Jane Wilson", "George Wilson"],
-            "children": []
+            "childrenIds": []
         },
         {
             "name": "Henry Taylor",
             "gender": "Male",
             "dateOfBirth": "1964-03-22",
             "age": 59,
-            "partner": "Emily Taylor",
+            "partnerId": "Emily Taylor",
             "parentIds": [],
-            "children": ["William Taylor", "Grace Taylor"]
+            "childrenIds": ["William Taylor", "Grace Taylor"]
         },
         {
             "name": "William Taylor",
             "gender": "Male",
             "dateOfBirth": "1992-01-05",
             "age": 31,
-            "partner": "",
+            "partnerId": "",
             "parentIds": ["Emily Taylor", "Henry Taylor"],
-            "children": []
+            "childrenIds": []
         },
         {
             "name": "Grace Taylor",
             "gender": "Female",
             "dateOfBirth": "1994-09-12",
             "age": 29,
-            "partner": "",
+            "partnerId": "",
             "parentIds": ["Emily Taylor", "Henry Taylor"],
-            "children": []
+            "childrenIds": []
         },
         {
             "name": "Benjamin Wilson",
             "gender": "Male",
             "dateOfBirth": "1965-03-15",
             "age": 58,
-            "partner": "Rachel Wilson",
+            "partnerId": "Rachel Wilson",
             "parentIds": [],
-            "children": ["Nathan Wilson", "Hannah Wilson"]
+            "childrenIds": ["Nathan Wilson", "Hannah Wilson"]
         },
         {
             "name": "Rachel Wilson",
             "gender": "Female",
             "dateOfBirth": "1967-09-22",
             "age": 56,
-            "partner": "Benjamin Wilson",
+            "partnerId": "Benjamin Wilson",
             "parentIds": [],
-            "children": ["Nathan Wilson", "Hannah Wilson"]
+            "childrenIds": ["Nathan Wilson", "Hannah Wilson"]
         },
         {
             "name": "Nathan Wilson",
             "gender": "Male",
             "dateOfBirth": "1992-11-08",
             "age": 31,
-            "partner": "Victoria Chen",
+            "partnerId": "Victoria Chen",
             "parentIds": ["Benjamin Wilson", "Rachel Wilson"],
-            "children": ["Ethan Wilson", "Zoe Wilson"]
+            "childrenIds": ["Ethan Wilson", "Zoe Wilson"]
         },
         {
             "name": "Hannah Wilson",
             "gender": "Female",
             "dateOfBirth": "1995-04-30",
             "age": 28,
-            "partner": "",
+            "partnerId": "",
             "parentIds": ["Benjamin Wilson", "Rachel Wilson"],
-            "children": ["Lily Wilson"]
+            "childrenIds": ["Lily Wilson"]
         },
         {
             "name": "Victoria Chen",
             "gender": "Female",
             "dateOfBirth": "1993-07-14",
             "age": 30,
-            "partner": "Nathan Wilson",
+            "partnerId": "Nathan Wilson",
             "parentIds": [],
-            "children": ["Ethan Wilson", "Zoe Wilson"]
+            "childrenIds": ["Ethan Wilson", "Zoe Wilson"]
         },
         {
             "name": "Ethan Wilson",
             "gender": "Male",
             "dateOfBirth": "2019-12-03",
             "age": 4,
-            "partner": "",
+            "partnerId": "",
             "parentIds": ["Nathan Wilson", "Victoria Chen"],
-            "children": []
+            "childrenIds": []
         },
         {
             "name": "Zoe Wilson",
             "gender": "Female",
             "dateOfBirth": "2022-05-17",
             "age": 1,
-            "partner": "",
+            "partnerId": "",
             "parentIds": ["Nathan Wilson", "Victoria Chen"],
-            "children": []
+            "childrenIds": []
         },
         {
             "name": "Lily Wilson",
             "gender": "Female",
             "dateOfBirth": "2020-08-25",
             "age": 3,
-            "partner": "",
+            "partnerId": "",
             "parentIds": ["Hannah Wilson"],
-            "children": []
+            "childrenIds": []
         }
     ]
 }

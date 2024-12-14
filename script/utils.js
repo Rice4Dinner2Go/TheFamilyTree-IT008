@@ -243,14 +243,84 @@ async function createMultiplePersons(persons) {
     }
 }
 
-//Cái hàm này để test funtion, vô page_tree.html, bấm vô setting rồi bấm nút 'debug' để chạy code
-async function test() {
-    console.log("Testing delete functionality...");
-    // Test function
-    
-    console.log("Test completed.");
+async function importPersons(data) {
+    try {
+        console.log("First iteration: Creating persons...");
+        // First iteration: Create all persons with basic info
+        const persons = data.people.map(person => ({
+            "name": person.name,
+            "gender": person.gender,
+            "dateOfBirth": person.dateOfBirth,
+            "age": person.age,
+            "partnerId": "",
+            "parentIds": [],
+            "childrenIds": []
+        }));
+
+        // Create all persons in database
+        await createMultiplePersons(persons);
+        console.log("Created all persons");
+
+        console.log("Second iteration: Adding partner relationships...");
+        // Second iteration: Add partner relationships
+        for (const person of data.people) {
+            if (person.partnerId) {
+                const personId = await findWithName(person.name);
+                const partnerId = await findWithName(person.partnerId);
+                if (personId && partnerId) {
+                    await addPartner(personId, partnerId);
+                    console.log(`Added partner relationship: ${person.name} - ${person.partnerId}`);
+                }
+            }
+        }
+
+        console.log("Third iteration: Adding parent-child relationships...");
+        // Third iteration: Add parent-child relationships
+        for (const person of data.people) {
+            if (person.parentIds && person.parentIds.length > 0) {
+                const childId = await findWithName(person.name);
+                
+                // Add relationship to both parents if they exist
+                for (const parentName of person.parentIds) {
+                    const parentId = await findWithName(parentName);
+                    if (childId && parentId) {
+                        await api.addChild(parentId, childId);
+                        console.log(`Added child-parent relationship: ${person.name} -> ${parentName}`);
+                    }
+                }
+            }
+        }
+
+        console.log('Successfully completed all three iterations.');
+    } catch (error) {
+        console.error('Error importing persons:', error);
+    }
 }
 
+//Cái hàm này để test funtion, vô page_tree.html, bấm vô setting rồi bấm nút 'debug' để chạy code
+async function test() {
+    console.log("Starting import test...");
+    try {
+        // First clear all existing data
+        await deleteAllData();
+        console.log("Cleared existing data");
+
+        // Read and parse the test data
+        const response = await fetch('../log/testData2.json');
+        const testData = await response.json();
+        console.log("Loaded test data:", testData);
+
+        // Import the data
+        await importPersons(testData);
+        console.log("Import completed successfully");
+
+        // Verify data was imported
+        const hasData = await isDataAvailable();
+        console.log("Data verification:", hasData ? "Success" : "Failed");
+    } catch (error) {
+        console.error("Test failed:", error);
+    }
+}
 
 //Thêm listener cho các nút nếu cần
 document.addEventListener("DOMContentLoaded", () => {
@@ -261,7 +331,7 @@ document.addEventListener("DOMContentLoaded", () => {
         deleteAllDataBtn.addEventListener('click', async () => {
             if (confirm('WARNING: This will permanently delete all your family tree data. This action cannot be undone. Are you sure you want to proceed?')) {
                 try {
-                    await delete_all_data();
+                    await deleteAllData();
                     // Close the settings popup
                     document.getElementById('interfaceSettingsPopup').style.display = 'none';
                     document.getElementById('overlay').style.display = 'none';
@@ -291,4 +361,5 @@ export {
     addParent,
     addSibling,
     createMultiplePersons,
+    importPersons,
 };
