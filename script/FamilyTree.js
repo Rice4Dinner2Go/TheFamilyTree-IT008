@@ -33,23 +33,50 @@ function createPersonElement(person, isRoot = false) {
     return div;
 }
 
+function createPlaceholderElement() {
+    const div = document.createElement('div');
+    div.className = 'person placeholder';
+    div.innerHTML = `
+        <h3>Unknown</h3>
+        <p>No Data</p>
+    `;
+    return div;
+}
+
 function findPartnerPairs(people) {
     const pairs = [];
+    const processedIds = new Set();
+
     people.forEach(person => {
+        if (processedIds.has(person.id)) return;
+
+        // If person has a real partner
         if (person.partnerId) {
             const partner = findPerson(people, person.partnerId);
-            if (partner && !pairs.some(pair => 
-                pair.includes(person.id) || pair.includes(partner.id)
-            )) {
+            if (partner && !processedIds.has(partner.id)) {
                 pairs.push([person.id, partner.id]);
+                processedIds.add(person.id);
+                processedIds.add(partner.id);
             }
+        }
+        // If person has children but no partner, create a pair with placeholder
+        else if (person.childrenIds && person.childrenIds.length > 0) {
+            pairs.push([person.id, 'placeholder-' + person.id]);
+            processedIds.add(person.id);
         }
     });
     return pairs;
 }
 
 function drawPartnerConnection(svg, person1El, person2El, containerRect) {
-    if (!person1El || !person2El) return null;
+    if (!person1El) return null;
+    
+    // For placeholder partner, find the next sibling element (which should be the placeholder)
+    if (!person2El && person1El.nextElementSibling?.classList.contains('placeholder')) {
+        person2El = person1El.nextElementSibling;
+    }
+    
+    if (!person2El) return null;
 
     const rect1 = person1El.getBoundingClientRect();
     const rect2 = person2El.getBoundingClientRect();
@@ -63,7 +90,7 @@ function drawPartnerConnection(svg, person1El, person2El, containerRect) {
     partnerLine.setAttribute('y1', y);
     partnerLine.setAttribute('x2', x2);
     partnerLine.setAttribute('y2', y);
-    partnerLine.setAttribute('class', 'partner-line');
+    partnerLine.setAttribute('class', person2El.classList.contains('placeholder') ? 'partner-line placeholder-line' : 'partner-line');
     svg.appendChild(partnerLine);
 
     return {
@@ -118,29 +145,39 @@ function drawChildrenConnections(svg, parentConnection, childrenEls, containerRe
     });
 }
 
-function drawConnections(container, people, root, partner, children) {
+function drawConnections(container, people, root) {
     const connectionsDiv = document.createElement('div');
     connectionsDiv.className = 'connections';
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     
-    //Vẽ các mối quan hệ cho cá nhân 'people'
     setTimeout(() => {
         const containerRect = container.getBoundingClientRect();
         const partnerPairs = findPartnerPairs(people);
 
-        // Vẽ vợ, chồng
+        // Draw partner connections
         const partnerConnections = new Map();
         partnerPairs.forEach(([person1Id, person2Id]) => {
             const person1El = container.querySelector(`[data-id="${person1Id}"]`);
-            const person2El = container.querySelector(`[data-id="${person2Id}"]`);
+            let person2El;
+            
+            // Handle both real partners and placeholders
+            if (person2Id.startsWith('placeholder-')) {
+                // The placeholder element should be the next sibling
+                person2El = null; // Let drawPartnerConnection find the placeholder
+            } else {
+                person2El = container.querySelector(`[data-id="${person2Id}"]`);
+            }
+
             const connection = drawPartnerConnection(svg, person1El, person2El, containerRect);
             if (connection) {
                 partnerConnections.set(person1Id, connection);
-                partnerConnections.set(person2Id, connection);
+                if (!person2Id.startsWith('placeholder-')) {
+                    partnerConnections.set(person2Id, connection);
+                }
             }
         });
 
-        // Vẽ con cái
+        // Draw children connections
         people.forEach(person => {
             const parentConnection = partnerConnections.get(person.id);
             if (parentConnection && person.childrenIds.length > 0) {
@@ -155,6 +192,7 @@ function drawConnections(container, people, root, partner, children) {
     connectionsDiv.appendChild(svg);
     return connectionsDiv;
 }
+
 // Hàm cập nhật thông tin trong panel bên phải
 function updateInfoPanel(person) {
     document.getElementById('info-name').textContent = person.name;
@@ -195,6 +233,12 @@ async function drawFamilyTree() {
                 const parentEl = createPersonElement(parent);
                 parentEl.addEventListener("click", () => handlePersonClick(parent.id));
                 parentsLayer.appendChild(parentEl);
+                
+                // Add placeholder for missing partner if parent has children
+                if (!parent.partnerId && parent.childrenIds && parent.childrenIds.length > 0) {
+                    const placeholderEl = createPlaceholderElement();
+                    parentsLayer.appendChild(placeholderEl);
+                }
             }
             treeContainer.appendChild(parentsLayer);
         }
@@ -208,7 +252,7 @@ async function drawFamilyTree() {
         rootEl.addEventListener("click", () => handlePersonClick(root.id));
         currentLayer.appendChild(rootEl);
 
-        // Add partner if exists
+        // Add partner if exists, or placeholder if root has children
         if (root.partnerId) {
             const partner = await api.getPersonById(root.partnerId);
             if (partner) {
@@ -216,6 +260,9 @@ async function drawFamilyTree() {
                 partnerEl.addEventListener("click", () => handlePersonClick(partner.id));
                 currentLayer.appendChild(partnerEl);
             }
+        } else if (root.childrenIds && root.childrenIds.length > 0) {
+            const placeholderEl = createPlaceholderElement();
+            currentLayer.appendChild(placeholderEl);
         }
         treeContainer.appendChild(currentLayer);
 
@@ -231,6 +278,12 @@ async function drawFamilyTree() {
                     const childEl = createPersonElement(child);
                     childEl.addEventListener("click", () => handlePersonClick(child.id));
                     childrenLayer.appendChild(childEl);
+                    
+                    // Add placeholder for missing partner if child has children
+                    if (!child.partnerId && child.childrenIds && child.childrenIds.length > 0) {
+                        const placeholderEl = createPlaceholderElement();
+                        childrenLayer.appendChild(placeholderEl);
+                    }
                 }
             }
             treeContainer.appendChild(childrenLayer);

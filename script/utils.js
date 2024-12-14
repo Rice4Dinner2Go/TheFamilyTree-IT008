@@ -191,6 +191,40 @@ async function addParent(personId, parentId) {
     }
 }
 
+async function addSibling(personId, siblingId) {
+    try {
+        // Get both person and sibling data
+        const [person, sibling] = await Promise.all([
+            api.getPersonById(personId),
+            api.getPersonById(siblingId)
+        ]);
+
+        // Check if both persons exist
+        if (!person || !sibling) {
+            console.error('Person or sibling not found');
+            return;
+        }
+
+        // Get parents of the person
+        const parents = await api.getParents(personId);
+        if (parents.length === 0) {
+            console.error('Person has no parents to assign to sibling');
+            return;
+        }
+
+        // Add each parent to the sibling
+        for (const parent of parents) {
+            await addParent(siblingId, parent.id);
+            console.log(`Added parent ${parent.name} to sibling ${sibling.name}`);
+        }
+
+        console.log(`Successfully made ${person.name} and ${sibling.name} siblings`);
+    } catch (error) {
+        console.error('Error adding sibling:', error);
+        throw error;
+    }
+}
+
 async function createMultiplePersons(persons) {
     try {
         // Duyệt qua từng person trong danh sách và tạo mới
@@ -215,7 +249,7 @@ async function test() {
     // Test function
     // deleteAllData();
 
-    addChild("675d23d28899e279821a5d36", "675d23d2aa254d6f02cd3c2c")
+    addPartner("675d2993aa254df564cd3c2f", "675d2993aa254dfb0acd3c2e")
 
     // createMultiplePersons([
     //     {
@@ -241,6 +275,24 @@ async function test() {
     //         "gender": "Male",
     //         "dateOfBirth": "1935-03-10",
     //         "age": 88,
+    //         "partnerId": "",
+    //         "parentIds": [],
+    //         "childrenIds": []
+    //     },
+    //     {
+    //         "name": "Michael Smith",
+    //         "gender": "Male",
+    //         "dateOfBirth": "1990-02-14",
+    //         "age": 33,
+    //         "partnerId": "",
+    //         "parentIds": [],
+    //         "childrenIds": []
+    //     },
+    //     {
+    //         "name": "Sarah Johnson",
+    //         "gender": "Female",
+    //         "dateOfBirth": "1992-07-30",
+    //         "age": 31,
     //         "partnerId": "",
     //         "parentIds": [],
     //         "childrenIds": []
@@ -288,5 +340,6 @@ export {
     addPartner,
     addChild,
     addParent,
+    addSibling,
     createMultiplePersons,
 };

@@ -43,6 +43,16 @@
     margin: 0;
     font-size: 0.9em;
 }
+.person.placeholder {
+    background-color: #808080;
+    opacity: 1;
+    cursor: default;
+}
+
+.person.placeholder h3,
+.person.placeholder p {
+    color: #ffffff;
+}
 .connections {
     position: absolute;
     top: 0;
@@ -62,6 +72,11 @@ svg {
 .partner-line {
     stroke: #666;
     stroke-width: 2;
+}
+.partner-line.placeholder-line {
+    stroke: #808080;
+    stroke-width: 2;
+    stroke-dasharray: 4;
 }
 .child-line {
     stroke: #666;
