@@ -1,3 +1,7 @@
+import api from "./api.js";
+import {addPartner, addChild, addParent, addSibling} from "./utils.js";
+import {rootId, drawFamilyTree, clearCache} from "./FamilyTree.js";
+
 const addButton = document.getElementById("addButton");
 const dialog = document.getElementById("dialog");
 const cancelButton = document.getElementById("cancelButton");
@@ -21,7 +25,7 @@ cancelButton.addEventListener("click", () => {
 
 document
   .getElementById("addMemberForm")
-  .addEventListener("submit", function (event) {
+  .addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const formData = new FormData(this);
@@ -30,10 +34,62 @@ document
       data[key] = value;
     });
 
-    console.log("New member data:", data);
-    alert("Thành viên đã được thêm!");
+    try {
+      // Calculate age
+      const birthYear = parseInt(data.dateOfBirth.split('-')[0]);
+      const age = 2024 - birthYear;
+
+      // Create person data object
+      const personData = {
+        "name": data.givenName,
+        "gender": data.sex,
+        "dateOfBirth": data.dateOfBirth,
+        "age": age,
+        "partnerId": "",
+        "parentIds": [],
+        "childrenIds": []
+      };
+
+      // Create the new person
+      const newPerson = await api.createPerson(personData);
+      console.log("Created person:", newPerson.id);
+
+      // Establish relationship based on selection
+      const relationship = data.relationship;
+      switch (relationship) {
+        case 'parent':
+          await addParent(rootId, newPerson.id);
+          break;
+        case 'child':
+          await addChild(rootId, newPerson.id);
+          break;
+        case 'partner':
+          await addPartner(rootId, newPerson.id);
+          break;
+        case 'sibling':
+          await addSibling(rootId, newPerson.id);
+          break;
+      }
+
+      // Clear the form
+      this.reset();
+      
+      // Hide the dialog
+      dialog.classList.add("hidden");
+      
+      // Clear the cache and update the tree
+      clearCache();
+      await drawFamilyTree();
+      
+      alert("Thành viên đã được thêm thành công!");
+    } catch (error) {
+      console.error("Error adding new member:", error);
+      alert("Có lỗi xảy ra khi thêm thành viên!");
+    }
+    
     dialog.classList.add("hidden");
   });
+
 // Các hộp thoại
 const editDialog = document.getElementById("editDialog");
 const deleteDialog = document.getElementById("deleteDialog");

@@ -7,6 +7,12 @@ var family;
 // Cache for storing person data
 let personCache = new Map();
 
+// Function to clear the cache and family data
+function clearCache() {
+    personCache.clear();
+    family = null;
+}
+
 async function getPersonById(id) {
     if (!personCache.has(id)) {
         const person = await api.getPersonById(id);
@@ -374,7 +380,15 @@ async function drawFamilyTree() {
                     childEl.addEventListener("click", () => handlePersonClick(child.id));
                     childrenLayer.appendChild(childEl);
                     
-                    if (!child.partnerId && child.childrenIds?.length > 0) {
+                    // Add child's partner if exists
+                    if (child.partnerId) {
+                        const partner = findPerson(child.partnerId);
+                        if (partner) {
+                            const partnerEl = createPersonElement(partner);
+                            partnerEl.addEventListener("click", () => handlePersonClick(partner.id));
+                            childrenLayer.appendChild(partnerEl);
+                        }
+                    } else if (child.childrenIds?.length > 0) {
                         const placeholderEl = createPlaceholderElement();
                         childrenLayer.appendChild(placeholderEl);
                     }
@@ -390,5 +404,13 @@ async function drawFamilyTree() {
         console.error("Error drawing family tree:", error);
     }
 }
+
+// Export functions and variables
+export {
+    rootId,
+    drawFamilyTree,
+    clearCache,
+    handlePersonClick
+};
 
 drawFamilyTree();
