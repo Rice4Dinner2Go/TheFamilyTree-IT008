@@ -300,38 +300,43 @@ async function importPersons(data) {
 async function deletePerson(personId) 
 {
     try {
-        // Lấy danh sách tất cả các person
-        const allPersons = await api.getAllPersons();
+        // Bước 1: Lấy thông tin chi tiết của người cần xóa
+        const person = await api.getPersonById(personId);
 
-        // Duyệt qua tất cả các person để xóa 
-        for (const person of allPersons) {
-            const updates = {};
+        // Tạo đối tượng newPerson dựa trên dữ liệu hiện tại của người đó
+        const newPerson = { ...person };
 
-            // Kiểm tra và xóa partnerId nếu trùng với personId cần xóa
-            if (person.partnerId === personId) {
-                updates.partnerId = "";
-            }
+        // Bước 2: Xóa liên kết partnerId của người đó với đối tác (nếu có)
+        if (person.partnerId) {
+            const partner = await api.getPersonById(person.partnerId);
+            const updatedPartner = { ...partner, partnerId: null };
+            await api.updatePerson(partner.id, updatedPartner);
+        }
 
-            // Kiểm tra và xóa parentIds nếu có chứa personId cần xóa
-            if (person.parentIds && person.parentIds.includes(personId)) {
-                updates.parentIds = person.parentIds.filter(id => id !== personId);
-            }
-
-            // Kiểm tra và xóa childrenIds nếu có chứa personId cần xóa
-            if (person.childrenIds && person.childrenIds.includes(personId)) {
-                updates.childrenIds = person.childrenIds.filter(id => id !== personId);
-            }
-
-            // Nếu có bất kỳ cập nhật nào, thực hiện cập nhật
-            if (Object.keys(updates).length > 0) {
-                await api.updatePerson(person._id, updates);
+        // Bước 3: Xóa personId khỏi danh sách childrenIds của cha/mẹ
+        if (person.parentIds && person.parentIds.length > 0) {
+            for (const parentId of person.parentIds) {
+                const parent = await api.getPersonById(parentId);
+                const updatedChildrenIds = parent.childrenIds.filter(id => id !== personId);
+                const updatedParent = { ...parent, childrenIds: updatedChildrenIds };
+                await api.updatePerson(parent.id, updatedParent);
             }
         }
 
-        // Sau khi xóa các tham chiếu, xóa chính person đó
+        // Bước 4: Xóa personId khỏi danh sách parentIds của con cái
+        if (person.childrenIds && person.childrenIds.length > 0) {
+            for (const childId of person.childrenIds) {
+                const child = await api.getPersonById(childId);
+                const updatedParentIds = child.parentIds.filter(id => id !== personId);
+                const updatedChild = { ...child, parentIds: updatedParentIds };
+                await api.updatePerson(child.id, updatedChild);
+            }
+        }
+
+        // Bước 5: Xóa người đó
         await api.deletePerson(personId);
 
-        console.log(`Person with ID ${personId} and related references deleted successfully.`);
+        console.log(`Successfully deleted person with ID ${personId} and all related links.`);
     } catch (error) {
         console.error(`Error deleting person with ID ${personId}:`, error);
         throw error;
