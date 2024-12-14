@@ -301,72 +301,81 @@ async function importPersons(data) {
     }, 'Importing family data...');
 }
 
-async function deletePerson(personId) 
-{
-    try {
-        // Bước 1: Lấy thông tin chi tiết của người cần xóa
-        const person = await api.getPersonById(personId);
-
-        // Tạo đối tượng newPerson dựa trên dữ liệu hiện tại của người đó
-        const newPerson = { ...person };
-
-        // Bước 2: Xóa liên kết partnerId của người đó với đối tác (nếu có)
-        if (person.partnerId) {
-            const partner = await api.getPersonById(person.partnerId);
-            const updatedPartner = { ...partner, partnerId: null };
-            await api.updatePerson(partner.id, updatedPartner);
-        }
-
-        // Bước 3: Xóa personId khỏi danh sách childrenIds của cha/mẹ
-        if (person.parentIds && person.parentIds.length > 0) {
-            for (const parentId of person.parentIds) {
-                const parent = await api.getPersonById(parentId);
-                const updatedChildrenIds = parent.childrenIds.filter(id => id !== personId);
-                const updatedParent = { ...parent, childrenIds: updatedChildrenIds };
-                await api.updatePerson(parent.id, updatedParent);
+async function deletePerson(personId) {
+    return withLoading(async () => {
+        try {
+            // Get person details and validate existence
+            const person = await api.getPersonById(personId);
+            if (!person) {
+                throw new Error(`Person with ID ${personId} not found`);
             }
-        }
 
-        // Bước 4: Xóa personId khỏi danh sách parentIds của con cái
-        if (person.childrenIds && person.childrenIds.length > 0) {
-            for (const childId of person.childrenIds) {
-                const child = await api.getPersonById(childId);
-                const updatedParentIds = child.parentIds.filter(id => id !== personId);
-                const updatedChild = { ...child, parentIds: updatedParentIds };
-                await api.updatePerson(child.id, updatedChild);
+            // Collect all update operations
+            const updateOperations = [];
+
+            // Update partner if exists
+            if (person.partnerId) {
+                const partner = await api.getPersonById(person.partnerId);
+                if (partner) {
+                    // Keep all partner's existing data but set partnerId to null
+                    updateOperations.push(
+                        api.updatePerson(partner.id, {
+                            ...partner,
+                            partnerId: ""
+                        })
+                    );
+                }
             }
+
+            // Update parents
+            if (person.parentIds?.length > 0) {
+                const parentUpdates = person.parentIds.map(parentId => 
+                    api.getPersonById(parentId).then(parent => {
+                        if (parent) {
+                            return api.updatePerson(parentId, {
+                                ...parent,
+                                childrenIds: parent.childrenIds.filter(id => id !== personId)
+                            });
+                        }
+                    })
+                );
+                updateOperations.push(...parentUpdates);
+            }
+
+            // Update children
+            if (person.childrenIds?.length > 0) {
+                const childUpdates = person.childrenIds.map(childId =>
+                    api.getPersonById(childId).then(child => {
+                        if (child) {
+                            return api.updatePerson(childId, {
+                                ...child,
+                                parentIds: child.parentIds.filter(id => id !== personId)
+                            });
+                        }
+                    })
+                );
+                updateOperations.push(...childUpdates);
+            }
+
+            // Execute all updates in parallel
+            await Promise.all(updateOperations);
+
+            // Finally delete the person
+            await api.deletePerson(personId);
+
+            console.log(`Successfully deleted person with ID ${personId} and updated all relationships`);
+        } catch (error) {
+            console.error(`Failed to delete person with ID ${personId}:`, error);
+            throw error;
         }
-
-        // Bước 5: Xóa người đó
-        await api.deletePerson(personId);
-
-        console.log(`Successfully deleted person with ID ${personId} and all related links.`);
-    } catch (error) {
-        console.error(`Error deleting person with ID ${personId}:`, error);
-        throw error;
-    }
+    }, 'Deleting person...');
 }
 
 //Cái hàm này để test funtion, vô page_tree.html, bấm vô setting rồi bấm nút 'debug' để chạy code
 async function test() {
-    console.log("Starting import test...");
+    console.log("Starting test...");
     try {
-        // First clear all existing data
-        await deleteAllData();
-        console.log("Cleared existing data");
-
-        // Read and parse the test data
-        const response = await fetch('../log/testData2.json');
-        const testData = await response.json();
-        console.log("Loaded test data:", testData);
-
-        // Import the data
-        await importPersons(testData);
-        console.log("Import completed successfully");
-
-        // Verify data was imported
-        const hasData = await isDataAvailable();
-        console.log("Data verification:", hasData ? "Success" : "Failed");
+        await deletePerson("675d8ec2aa254dae07cd3d41");
     } catch (error) {
         console.error("Test failed:", error);
     }
@@ -405,6 +414,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 export {
     deleteAllData,
+    deletePerson,
     isDataAvailable,
     findWithName,
     addPartner,

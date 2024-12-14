@@ -1,6 +1,6 @@
 import api from "./api.js";
-import {addPartner, addChild, addParent, addSibling} from "./utils.js";
-import {rootId, drawFamilyTree, clearCache} from "./FamilyTree.js";
+import {addPartner, addChild, addParent, addSibling, deletePerson} from "./utils.js";
+import {rootId, drawFamilyTree, clearCache, handlePersonClick} from "./FamilyTree.js";
 
 const addButton = document.getElementById("addButton");
 const dialog = document.getElementById("dialog");
@@ -123,10 +123,56 @@ cancelDeleteButton.addEventListener("click", () => {
 });
 
 // Xác nhận xóa
-confirmDeleteButton.addEventListener("click", () => {
-  // Thực hiện xóa dữ liệu ở đây
-  alert("Member has been deleted!");
-  deleteDialog.classList.add("hidden");
+confirmDeleteButton.addEventListener("click", async () => {
+  try {
+    const person = await api.getPersonById(rootId);
+    if (!person) {
+      alert("Person not found!");
+      return;
+    }
+
+    let nextRootId = "";
+
+    // Check for partner first
+    if (person.partnerId) {
+      nextRootId = person.partnerId;
+    }
+    // Then check for parents
+    else if (person.parentIds && person.parentIds.length > 0) {
+      nextRootId = person.parentIds[0];
+    }
+    // Then check for children
+    else if (person.childrenIds && person.childrenIds.length > 0) {
+      nextRootId = person.childrenIds[0];
+    }
+    // If no relationships found
+    else {
+      if (confirm("This person has no relationships. Deleting them will return you to the main menu. Continue?")) {
+        await deletePerson(rootId);
+        window.location.href = "../index.html";
+        return;
+      }
+      deleteDialog.classList.add("hidden");
+      return;
+    }
+
+    // Delete the person first
+    await deletePerson(rootId);
+    
+    // Clear the cache to force reload of data
+    clearCache();
+    
+    // Update the root ID and redraw
+    handlePersonClick(nextRootId);
+    
+    // Close the delete dialog
+    deleteDialog.classList.add("hidden");
+    
+  } catch (error) {
+    console.error("Error deleting person:", error);
+    alert("An error occurred while deleting the person!");
+    deleteDialog.classList.add("hidden");
+  }
 });
 
 // Xử lý form sửa
