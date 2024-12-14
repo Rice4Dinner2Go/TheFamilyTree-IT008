@@ -7,6 +7,7 @@
     <link rel="icon" type="image/x-icon" href="/img/icon.ico">
     <link rel="stylesheet" href="style/MainMenu.css">
     <link rel="stylesheet" href="style/PageTransition.css">
+    <link rel="stylesheet" href="style/loading.css">
 </head>
 <body>
     <div class="container">
@@ -32,7 +33,6 @@
                         <option value="">Select Gender</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
-                        <option value="other">@Gmail</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -59,15 +59,11 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script/api.js"></script>
+    <script src="script/loading.js"></script>
+    <script type="module" src="script/mainMenu.js"></script>
     <script src="script/PageTransition.js"></script>
-    <script src="script/PopupForm.js"></script>
-    <script src="script/importData.js"></script>
-    <script>
-        document.getElementById('newTreeForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Để tương tác với data sau
-            goToPage('tree');
-        });
-    </script>
+    <script type="module" src="script/importData.js"></script>
 </body>
 </html>

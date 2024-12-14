@@ -1,22 +1,40 @@
+import { importPersons, deleteAllData } from './utils.js';
+
 let jsonData = null;
 
-function importFromJson() {
+async function importFromJson() {
     const fileInput = document.createElement('input');
     fileInput.type = 'file';
     fileInput.accept = '.json';  
 
-    fileInput.addEventListener('change', (event) => {
+    fileInput.addEventListener('change', async (event) => {
         const file = event.target.files[0];  
         if (file) {
             const reader = new FileReader();  
-            reader.onload = function(e) {
+            reader.onload = async function(e) {
                 try {
-                    jsonData = JSON.parse(e.target.result);  
-                    console.log("Dữ liệu JSON đã được tải lên:", jsonData);
-                    alert("Dữ liệu JSON đã được tải lên thành công!"); 
+                    // Show loading screen
+                    loadingScreen.show('Importing family tree...');
+                    
+                    jsonData = JSON.parse(e.target.result);
+                    console.log("JSON data loaded:", jsonData);
+                    
+                    // Delete existing data first
+                    await deleteAllData();
+                    console.log("Cleared existing data");
+                    
+                    // Import the new data
+                    await importPersons(jsonData);
+                    console.log("Successfully imported family tree");
+                    
+                    // Redirect to tree page
+                    window.location.href = 'page_Tree.html';
                 } catch (error) {
-                    console.error("Lỗi khi phân tích dữ liệu JSON:", error);
-                    alert("Đã xảy ra lỗi khi phân tích dữ liệu JSON.");
+                    console.error("Error importing data:", error);
+                    alert("Error importing family tree. Please check your JSON file and try again.");
+                } finally {
+                    // Hide loading screen
+                    loadingScreen.hide();
                 }
             };
 
@@ -26,3 +44,6 @@ function importFromJson() {
 
     fileInput.click();
 }
+
+// Make the function available globally
+window.importFromJson = importFromJson;

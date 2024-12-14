@@ -358,6 +358,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 export {
+    deleteAllData,
     isDataAvailable,
     findWithName,
     addPartner,
