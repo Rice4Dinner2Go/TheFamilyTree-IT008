@@ -247,57 +247,6 @@ async function createMultiplePersons(persons) {
 async function test() {
     console.log("Testing delete functionality...");
     // Test function
-    // deleteAllData();
-
-    addPartner("675d2993aa254df564cd3c2f", "675d2993aa254dfb0acd3c2e")
-
-    // createMultiplePersons([
-    //     {
-    //         "name": "John Smith",
-    //         "gender": "Male",
-    //         "dateOfBirth": "1960-05-15",
-    //         "age": 63,
-    //         "partnerId": "",
-    //         "parentIds": [],
-    //         "childrenIds": []
-    //     },
-    //     {
-    //         "name": "Mary Smith",
-    //         "gender": "Female",
-    //         "dateOfBirth": "1962-08-22",
-    //         "age": 61,
-    //         "partnerId": "",
-    //         "parentIds": [],
-    //         "childrenIds": []
-    //     },
-    //     {
-    //         "name": "Robert Smith",
-    //         "gender": "Male",
-    //         "dateOfBirth": "1935-03-10",
-    //         "age": 88,
-    //         "partnerId": "",
-    //         "parentIds": [],
-    //         "childrenIds": []
-    //     },
-    //     {
-    //         "name": "Michael Smith",
-    //         "gender": "Male",
-    //         "dateOfBirth": "1990-02-14",
-    //         "age": 33,
-    //         "partnerId": "",
-    //         "parentIds": [],
-    //         "childrenIds": []
-    //     },
-    //     {
-    //         "name": "Sarah Johnson",
-    //         "gender": "Female",
-    //         "dateOfBirth": "1992-07-30",
-    //         "age": 31,
-    //         "partnerId": "",
-    //         "parentIds": [],
-    //         "childrenIds": []
-    //     },]
-    // )
     
     console.log("Test completed.");
 }
