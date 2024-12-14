@@ -66,7 +66,7 @@ async function findWithName(name){
     return "";
 }
 
-async function addPartnersRelationship(personId, partnerId){
+async function addPartner(personId, partnerId){
     try {
         // Get both persons' data
         const [person1, person2] = await Promise.all([
@@ -92,16 +92,34 @@ async function addPartnersRelationship(personId, partnerId){
             return;
         }
 
+        // Get children of both persons
+        const [children1, children2] = await Promise.all([
+            api.getChildren(person1.id),
+            api.getChildren(person2.id)
+        ]);
+
         // Assign partners
         await api.assignPartner(person1.id, person2.id);
         console.log(`Successfully assigned partnership between ${person1.name} and ${person2.name}`);
+
+        // Add all children of person1 to person2
+        for (const child of children1) {
+            await api.addChild(person2.id, child.id);
+            console.log(`Added child ${child.name} to ${person2.name}`);
+        }
+
+        // Add all children of person2 to person1
+        for (const child of children2) {
+            await api.addChild(person1.id, child.id);
+            console.log(`Added child ${child.name} to ${person1.name}`);
+        }
     } catch (error) {
         console.error('Error assigning partnership:', error);
         throw error;
     }
 }
 
-async function addParentChildRelationship(parentId, childId) {
+async function addChild(parentId, childId) {
     try {
         // Get both parent and child data to verify they exist
         const [parent, child] = await Promise.all([
@@ -115,23 +133,60 @@ async function addParentChildRelationship(parentId, childId) {
             return;
         }
 
-        if (parent.partnerId === ""){
-            console.error('Must have a partner');
-            return;
-        }
+        // Add child to the parent
+        await api.addChild(parentId, childId);
+        console.log(`Added ${child.name} as child to ${parent.name}`);
 
-        // Check if IDs are valid
-        if (!parent.id || !child.id) {
-            console.error('Invalid parent or child ID');
-            return;
+        // If parent has a partner, add child to them as well
+        if (parent.partnerId) {
+            const partner = await api.getPersonById(parent.partnerId);
+            if (partner) {
+                await api.addChild(partner.id, childId);
+                console.log(`Added ${child.name} as child to partner ${partner.name}`);
+            }
         }
-
-        // Use the dedicated API endpoint to add the child relationship
-        await api.addChild(parent.id, child.id);
-        await api.addChild(parent.partnerId, child.id)
-        console.log(`Successfully added parent-child relationship between ${parent.name} and ${child.name}`);
     } catch (error) {
-        console.error('Error adding parent-child relationship:', error);
+        console.error('Error adding child:', error);
+        throw error;
+    }
+}
+
+async function addParent(personId, parentId) {
+    try {
+        // Get data for both person and parent
+        const [person, parent] = await Promise.all([
+            api.getPersonById(personId),
+            api.getPersonById(parentId)
+        ]);
+
+        // Check if both persons exist
+        if (!person || !parent) {
+            console.error('Person or parent not found');
+            return;
+        }
+
+        // Get current parents of the person
+        const currentParents = await api.getParents(personId);
+        
+        if (currentParents.length === 0) {
+            // No parents yet, add as first parent
+            await api.addChild(parentId, personId);
+            console.log(`Successfully added ${parent.name} as parent to ${person.name}`);
+        } else if (currentParents.length === 1) {
+            // One parent exists, check gender compatibility and add as partner
+            const existingParent = currentParents[0];
+            if (existingParent.gender === parent.gender) {
+                console.error('Parents must be of different genders');
+                return;
+            }
+            await addPartner(existingParent.id, parentId);
+            console.log(`Successfully added ${parent.name} as second parent to ${person.name}`);
+        } else {
+            console.error('Person already has two parents');
+            return;
+        }
+    } catch (error) {
+        console.error('Error adding parent:', error);
         throw error;
     }
 }
@@ -158,9 +213,9 @@ async function createMultiplePersons(persons) {
 async function test() {
     console.log("Testing delete functionality...");
     // Test function
+    // deleteAllData();
 
-    addPartnersRelationship("675c1dc1aa254df8f6cd3c23", "675c1dc1aa254d5038cd3c22"),
-    addParentChildRelationship("675c1dc1aa254df8f6cd3c23", "675c1dc1aa254d44c4cd3c24")
+    addChild("675d23d28899e279821a5d36", "675d23d2aa254d6f02cd3c2c")
 
     // createMultiplePersons([
     //     {
@@ -230,7 +285,8 @@ document.addEventListener("DOMContentLoaded", () => {
 export {
     isDataAvailable,
     findWithName,
-    addPartnersRelationship,
-    addParentChildRelationship,
+    addPartner,
+    addChild,
+    addParent,
     createMultiplePersons,
 };
