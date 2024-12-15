@@ -33,63 +33,63 @@ document
     formData.forEach((value, key) => {
       data[key] = value;
     });
+    return withLoading(async () => {
+      try {
+        // Calculate age
+        const birthYear = parseInt(data.dateOfBirth.split('-')[0]);
+        const age = 2024 - birthYear;
 
-    try {
-      // Calculate age
-      const birthYear = parseInt(data.dateOfBirth.split('-')[0]);
-      const age = 2024 - birthYear;
+        // Create person data object
+        const personData = {
+          "name": data.givenName,
+          "gender": data.sex,
+          "dateOfBirth": data.dateOfBirth,
+          "age": age,
+          "partnerId": "",
+          "parentIds": [],
+          "childrenIds": []
+        };
 
-      // Create person data object
-      const personData = {
-        "name": data.givenName,
-        "gender": data.sex,
-        "dateOfBirth": data.dateOfBirth,
-        "age": age,
-        "partnerId": "",
-        "parentIds": [],
-        "childrenIds": []
-      };
+        // Create the new person
+        const newPerson = await api.createPerson(personData);
+        console.log("Created person:", newPerson.id);
 
-      // Create the new person
-      const newPerson = await api.createPerson(personData);
-      console.log("Created person:", newPerson.id);
+        // Establish relationship based on selection
+        const relationship = data.relationship;
+        switch (relationship) {
+          case 'parent':
+            await addParent(rootId, newPerson.id);
+            break;
+          case 'child':
+            await addChild(rootId, newPerson.id);
+            break;
+          case 'partner':
+            await addPartner(rootId, newPerson.id);
+            break;
+          case 'sibling':
+            await addSibling(rootId, newPerson.id);
+            break;
+        }
 
-      // Establish relationship based on selection
-      const relationship = data.relationship;
-      switch (relationship) {
-        case 'parent':
-          await addParent(rootId, newPerson.id);
-          break;
-        case 'child':
-          await addChild(rootId, newPerson.id);
-          break;
-        case 'partner':
-          await addPartner(rootId, newPerson.id);
-          break;
-        case 'sibling':
-          await addSibling(rootId, newPerson.id);
-          break;
+        // Clear the form
+        this.reset();
+        
+        // Hide the dialog
+        dialog.classList.add("hidden");
+        
+        // Clear the cache and update the tree
+        clearCache();
+        await drawFamilyTree();
+        
+        // Update search data after new person is added
+        await initializePersonsData();
+        
+        alert("Thành viên đã được thêm thành công!");
+      } catch (error) {
+        console.error("Error adding new member:", error);
+        alert("Có lỗi xảy ra khi thêm thành viên!");
       }
-
-      // Clear the form
-      this.reset();
-      
-      // Hide the dialog
-      dialog.classList.add("hidden");
-      
-      // Clear the cache and update the tree
-      clearCache();
-      await drawFamilyTree();
-      
-      // Update search data after new person is added
-      await initializePersonsData();
-      
-      alert("Thành viên đã được thêm thành công!");
-    } catch (error) {
-      console.error("Error adding new member:", error);
-      alert("Có lỗi xảy ra khi thêm thành viên!");
-    }
-    
+    }, "Creating person..."),
     dialog.classList.add("hidden");
   });
 

@@ -373,12 +373,7 @@ async function deletePerson(personId) {
 
 //Cái hàm này để test funtion, vô page_tree.html, bấm vô setting rồi bấm nút 'debug' để chạy code
 async function test() {
-    console.log("Starting test...");
-    try {
-        await deletePerson("675d8ec2aa254dae07cd3d41");
-    } catch (error) {
-        console.error("Test failed:", error);
-    }
+    console.log("Clecked debug");
 }
 
 //Thêm listener cho các nút nếu cần
