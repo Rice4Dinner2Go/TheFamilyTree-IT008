@@ -1,5 +1,5 @@
 import api from './api.js';
-import { deleteAllData } from "./utils.js";
+import { deleteAllData, isDataAvailable} from "./utils.js";
 
 function showNewTreeForm() {
     document.getElementById('popupForm-newTree').style.display = 'flex';
@@ -65,10 +65,22 @@ async function handleNewTreeSubmit(event) {
 }
 
 // Add event listeners when the document is loaded
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const newTreeForm = document.getElementById('newTreeForm');
     if (newTreeForm) {
         newTreeForm.addEventListener('submit', handleNewTreeSubmit);
+    }
+
+    const continueButton = document.getElementById("continueButton");
+    try {
+        const dataAvailable = await isDataAvailable();
+        if (dataAvailable) {
+            continueButton.style.display = "block";
+        } else {
+            continueButton.style.display = "none";
+        }
+    } catch (error) {
+        console.error("Error checking data availability:", error);
     }
 
     // Make functions available globally
