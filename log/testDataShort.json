@@ -1,0 +1,85 @@
+{
+    "people": [
+        {
+            "name": "John Smith",
+            "gender": "Male",
+            "dateOfBirth": "1960-05-15",
+            "age": 63,
+            "partnerId": "Mary Smith",
+            "parentIds": ["Robert Smith", "Patricia Smith"],
+            "childrenIds": ["Michael Smith", "Sarah Johnson", "David Smith"]
+        },
+        {
+            "name": "Mary Smith",
+            "gender": "Female",
+            "dateOfBirth": "1962-08-22",
+            "age": 61,
+            "partnerId": "John Smith",
+            "parentIds": ["William Johnson", "Elizabeth Johnson"],
+            "childrenIds": ["Michael Smith", "Sarah Johnson", "David Smith"]
+        },
+        {
+            "name": "Robert Smith",
+            "gender": "Male",
+            "dateOfBirth": "1935-03-10",
+            "age": 88,
+            "partnerId": "Patricia Smith",
+            "parentIds": [],
+            "childrenIds": ["John Smith", "Thomas Smith", "Jane Wilson"]
+        },
+        {
+            "name": "Patricia Smith",
+            "gender": "Female",
+            "dateOfBirth": "1938-11-28",
+            "age": 85,
+            "partnerId": "Robert Smith",
+            "parentIds": [],
+            "childrenIds": ["John Smith", "Thomas Smith", "Jane Wilson"]
+        },
+        {
+            "name": "Michael Smith",
+            "gender": "Male",
+            "dateOfBirth": "1990-02-14",
+            "age": 33,
+            "partnerId": "Emma Davis",
+            "parentIds": ["John Smith", "Mary Smith"],
+            "childrenIds": ["Oliver Smith", "Sophia Smith"]
+        },
+        {
+            "name": "Sarah Johnson",
+            "gender": "Female",
+            "dateOfBirth": "1992-07-30",
+            "age": 31,
+            "partnerId": "James Johnson",
+            "parentIds": ["John Smith", "Mary Smith"],
+            "childrenIds": ["Liam Johnson"]
+        },
+        {
+            "name": "David Smith",
+            "gender": "Male",
+            "dateOfBirth": "1994-12-05",
+            "age": 29,
+            "partnerId": "Ava Brown",
+            "parentIds": ["John Smith", "Mary Smith"],
+            "childrenIds": ["Lucas Smith", "Mia Smith"]
+        },
+        {
+            "name": "William Johnson",
+            "gender": "Male",
+            "dateOfBirth": "1940-06-18",
+            "age": 83,
+            "partnerId": "Elizabeth Johnson",
+            "parentIds": [],
+            "childrenIds": ["Mary Smith", "Emily Taylor"]
+        },
+        {
+            "name": "Elizabeth Johnson",
+            "gender": "Female",
+            "dateOfBirth": "1942-09-25",
+            "age": 81,
+            "partnerId": "William Johnson",
+            "parentIds": [],
+            "childrenIds": ["Mary Smith", "Emily Taylor"]
+        }
+    ]
+}

@@ -3,37 +3,38 @@ import api from './api.js';
 // Xóa hết data trên database. Dùng khi tạo cây mới.
 async function deleteAllData()
 {
-
-    try {
-        // fetch the list of all persons
-        const data = await api.getAllPersons();
-        if(!data || data.length === 0)
-        {
-            console.log('No data to delete.');
-            return;
-        }
-
-
-        // select each person and delete them 
-        for (const person of data)
-        {
-            try{
-                await api.deletePerson(person.id);
-                console.log(`Deleted person with ID: ${person.id}`);
-            } 
-            catch (error)
+    return withLoading(async () => {
+        try {
+            // fetch the list of all persons
+            const data = await api.getAllPersons();
+            if(!data || data.length === 0)
             {
-                console.log(`Error deleting person with ID: ${person.id}`,error);
-            }     
+                console.log('No data to delete.');
+                return;
+            }
+
+            // select each person and delete them 
+            for (const person of data)
+            {
+                try{
+                    await api.deletePerson(person.id);
+                    console.log(`Deleted person with ID: ${person.id}`);
+                } 
+                catch (error)
+                {
+                    console.log(`Error deleting person with ID: ${person.id}`,error);
+                }     
+            }
+
+            console.log('Completed deleting all data.');
+
         }
-
-        console.log('Completed deleting all data.');
-
-    }
-    catch (error)
-    {
-        console.log('Error fetching the list of persons or deleting data:',error);
-    }
+        catch (error)
+        {
+            console.log('Error fetching the list of persons or deleting data:',error);
+            throw error;
+        }
+    }, 'Deleting all data...');
 }
 
 // Hàm check xem data đã load hay chưa: output: true/false
@@ -66,7 +67,7 @@ async function findWithName(name){
     return "";
 }
 
-async function addPartnersRelationship(personId, partnerId){
+async function addPartner(personId, partnerId){
     try {
         // Get both persons' data
         const [person1, person2] = await Promise.all([
@@ -92,16 +93,34 @@ async function addPartnersRelationship(personId, partnerId){
             return;
         }
 
+        // Get children of both persons
+        const [children1, children2] = await Promise.all([
+            api.getChildren(person1.id),
+            api.getChildren(person2.id)
+        ]);
+
         // Assign partners
         await api.assignPartner(person1.id, person2.id);
         console.log(`Successfully assigned partnership between ${person1.name} and ${person2.name}`);
+
+        // Add all children of person1 to person2
+        for (const child of children1) {
+            await api.addChild(person2.id, child.id);
+            console.log(`Added child ${child.name} to ${person2.name}`);
+        }
+
+        // Add all children of person2 to person1
+        for (const child of children2) {
+            await api.addChild(person1.id, child.id);
+            console.log(`Added child ${child.name} to ${person1.name}`);
+        }
     } catch (error) {
         console.error('Error assigning partnership:', error);
         throw error;
     }
 }
 
-async function addParentChildRelationship(parentId, childId) {
+async function addChild(parentId, childId) {
     try {
         // Get both parent and child data to verify they exist
         const [parent, child] = await Promise.all([
@@ -115,23 +134,94 @@ async function addParentChildRelationship(parentId, childId) {
             return;
         }
 
-        if (parent.partnerId === ""){
-            console.error('Must have a partner');
-            return;
-        }
+        // Add child to the parent
+        await api.addChild(parentId, childId);
+        console.log(`Added ${child.name} as child to ${parent.name}`);
 
-        // Check if IDs are valid
-        if (!parent.id || !child.id) {
-            console.error('Invalid parent or child ID');
-            return;
+        // If parent has a partner, add child to them as well
+        if (parent.partnerId) {
+            const partner = await api.getPersonById(parent.partnerId);
+            if (partner) {
+                await api.addChild(partner.id, childId);
+                console.log(`Added ${child.name} as child to partner ${partner.name}`);
+            }
         }
-
-        // Use the dedicated API endpoint to add the child relationship
-        await api.addChild(parent.id, child.id);
-        await api.addChild(parent.partnerId, child.id)
-        console.log(`Successfully added parent-child relationship between ${parent.name} and ${child.name}`);
     } catch (error) {
-        console.error('Error adding parent-child relationship:', error);
+        console.error('Error adding child:', error);
+        throw error;
+    }
+}
+
+async function addParent(personId, parentId) {
+    try {
+        // Get data for both person and parent
+        const [person, parent] = await Promise.all([
+            api.getPersonById(personId),
+            api.getPersonById(parentId)
+        ]);
+
+        // Check if both persons exist
+        if (!person || !parent) {
+            console.error('Person or parent not found');
+            return;
+        }
+
+        // Get current parents of the person
+        const currentParents = await api.getParents(personId);
+        
+        if (currentParents.length === 0) {
+            // No parents yet, add as first parent
+            await api.addChild(parentId, personId);
+            console.log(`Successfully added ${parent.name} as parent to ${person.name}`);
+        } else if (currentParents.length === 1) {
+            // One parent exists, check gender compatibility and add as partner
+            const existingParent = currentParents[0];
+            if (existingParent.gender === parent.gender) {
+                console.error('Parents must be of different genders');
+                return;
+            }
+            await addPartner(existingParent.id, parentId);
+            console.log(`Successfully added ${parent.name} as second parent to ${person.name}`);
+        } else {
+            console.error('Person already has two parents');
+            return;
+        }
+    } catch (error) {
+        console.error('Error adding parent:', error);
+        throw error;
+    }
+}
+
+async function addSibling(personId, siblingId) {
+    try {
+        // Get both person and sibling data
+        const [person, sibling] = await Promise.all([
+            api.getPersonById(personId),
+            api.getPersonById(siblingId)
+        ]);
+
+        // Check if both persons exist
+        if (!person || !sibling) {
+            console.error('Person or sibling not found');
+            return;
+        }
+
+        // Get parents of the person
+        const parents = await api.getParents(personId);
+        if (parents.length === 0) {
+            console.error('Person has no parents to assign to sibling');
+            return;
+        }
+
+        // Add each parent to the sibling
+        for (const parent of parents) {
+            await api.addChild(parent.id, siblingId);
+            console.log(`Added parent ${parent.name} to sibling ${sibling.name}`);
+        }
+
+        console.log(`Successfully made ${person.name} and ${sibling.name} siblings`);
+    } catch (error) {
+        console.error('Error adding sibling:', error);
         throw error;
     }
 }
@@ -154,47 +244,137 @@ async function createMultiplePersons(persons) {
     }
 }
 
-//Cái hàm này để test funtion, vô page_tree.html, bấm vô setting rồi bấm nút 'debug' để chạy code
-async function test() {
-    console.log("Testing delete functionality...");
-    // Test function
+async function importPersons(data) {
+    return withLoading(async () => {
+        try {
+            console.log("First iteration: Creating persons...");
+            // First iteration: Create all persons with basic info
+            const persons = data.people.map(person => ({
+                "name": person.name,
+                "gender": person.gender,
+                "dateOfBirth": person.dateOfBirth,
+                "age": person.age,
+                "partnerId": "",
+                "parentIds": [],
+                "childrenIds": []
+            }));
 
-    addPartnersRelationship("675c1dc1aa254df8f6cd3c23", "675c1dc1aa254d5038cd3c22"),
-    addParentChildRelationship("675c1dc1aa254df8f6cd3c23", "675c1dc1aa254d44c4cd3c24")
+            // Create all persons in database
+            await createMultiplePersons(persons);
+            console.log("Created all persons");
 
-    // createMultiplePersons([
-    //     {
-    //         "name": "John Smith",
-    //         "gender": "Male",
-    //         "dateOfBirth": "1960-05-15",
-    //         "age": 63,
-    //         "partnerId": "",
-    //         "parentIds": [],
-    //         "childrenIds": []
-    //     },
-    //     {
-    //         "name": "Mary Smith",
-    //         "gender": "Female",
-    //         "dateOfBirth": "1962-08-22",
-    //         "age": 61,
-    //         "partnerId": "",
-    //         "parentIds": [],
-    //         "childrenIds": []
-    //     },
-    //     {
-    //         "name": "Robert Smith",
-    //         "gender": "Male",
-    //         "dateOfBirth": "1935-03-10",
-    //         "age": 88,
-    //         "partnerId": "",
-    //         "parentIds": [],
-    //         "childrenIds": []
-    //     },]
-    // )
-    
-    console.log("Test completed.");
+            console.log("Second iteration: Adding partner relationships...");
+            // Second iteration: Add partner relationships
+            for (const person of data.people) {
+                if (person.partnerId) {
+                    const personId = await findWithName(person.name);
+                    const partnerId = await findWithName(person.partnerId);
+                    if (personId && partnerId) {
+                        await addPartner(personId, partnerId);
+                        console.log(`Added partner relationship: ${person.name} - ${person.partnerId}`);
+                    }
+                }
+            }
+
+            console.log("Third iteration: Adding parent-child relationships...");
+            // Third iteration: Add parent-child relationships
+            for (const person of data.people) {
+                if (person.parentIds && person.parentIds.length > 0) {
+                    const childId = await findWithName(person.name);
+                    
+                    // Add relationship to both parents if they exist
+                    for (const parentName of person.parentIds) {
+                        const parentId = await findWithName(parentName);
+                        if (childId && parentId) {
+                            await api.addChild(parentId, childId);
+                            console.log(`Added child-parent relationship: ${person.name} -> ${parentName}`);
+                        }
+                    }
+                }
+            }
+
+            console.log('Successfully completed all three iterations.');
+        } catch (error) {
+            console.error('Error importing persons:', error);
+            throw error;
+        }
+    }, 'Importing family data...');
 }
 
+async function deletePerson(personId) {
+    return withLoading(async () => {
+        try {
+            // Get person details and validate existence
+            const person = await api.getPersonById(personId);
+            if (!person) {
+                throw new Error(`Person with ID ${personId} not found`);
+            }
+
+            // Collect all update operations
+            const updateOperations = [];
+
+            // Update partner if exists
+            if (person.partnerId) {
+                const partner = await api.getPersonById(person.partnerId);
+                if (partner) {
+                    // Keep all partner's existing data but set partnerId to null
+                    updateOperations.push(
+                        api.updatePerson(partner.id, {
+                            ...partner,
+                            partnerId: ""
+                        })
+                    );
+                }
+            }
+
+            // Update parents
+            if (person.parentIds?.length > 0) {
+                const parentUpdates = person.parentIds.map(parentId => 
+                    api.getPersonById(parentId).then(parent => {
+                        if (parent) {
+                            return api.updatePerson(parentId, {
+                                ...parent,
+                                childrenIds: parent.childrenIds.filter(id => id !== personId)
+                            });
+                        }
+                    })
+                );
+                updateOperations.push(...parentUpdates);
+            }
+
+            // Update children
+            if (person.childrenIds?.length > 0) {
+                const childUpdates = person.childrenIds.map(childId =>
+                    api.getPersonById(childId).then(child => {
+                        if (child) {
+                            return api.updatePerson(childId, {
+                                ...child,
+                                parentIds: child.parentIds.filter(id => id !== personId)
+                            });
+                        }
+                    })
+                );
+                updateOperations.push(...childUpdates);
+            }
+
+            // Execute all updates in parallel
+            await Promise.all(updateOperations);
+
+            // Finally delete the person
+            await api.deletePerson(personId);
+
+            console.log(`Successfully deleted person with ID ${personId} and updated all relationships`);
+        } catch (error) {
+            console.error(`Failed to delete person with ID ${personId}:`, error);
+            throw error;
+        }
+    }, 'Deleting person...');
+}
+
+//Cái hàm này để test funtion, vô page_tree.html, bấm vô setting rồi bấm nút 'debug' để chạy code
+async function test() {
+    console.log("Clecked debug");
+}
 
 //Thêm listener cho các nút nếu cần
 document.addEventListener("DOMContentLoaded", () => {
@@ -205,7 +385,7 @@ document.addEventListener("DOMContentLoaded", () => {
         deleteAllDataBtn.addEventListener('click', async () => {
             if (confirm('WARNING: This will permanently delete all your family tree data. This action cannot be undone. Are you sure you want to proceed?')) {
                 try {
-                    await delete_all_data();
+                    await deleteAllData();
                     // Close the settings popup
                     document.getElementById('interfaceSettingsPopup').style.display = 'none';
                     document.getElementById('overlay').style.display = 'none';
@@ -228,9 +408,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 export {
+    deleteAllData,
+    deletePerson,
     isDataAvailable,
     findWithName,
-    addPartnersRelationship,
-    addParentChildRelationship,
+    addPartner,
+    addChild,
+    addParent,
+    addSibling,
     createMultiplePersons,
+    importPersons,
 };

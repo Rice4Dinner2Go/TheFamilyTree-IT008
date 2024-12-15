@@ -17,7 +17,9 @@
     <link rel="stylesheet" href="style/PageTransition.css" />
     <link rel="stylesheet" href="style/FamilyTree.css" />
     <link rel="stylesheet" href="style/InformationPanel.css" />
+    <link rel="stylesheet" href="style/loading.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="script/api.js"></script>
     <script src="script/importData.js"></script>
   </head>
@@ -57,7 +59,7 @@
           >
           <div>Make a new tree</div>
         </a>
-        <a href="#">
+        <!-- <a href="#">
           <span
             class="material-icons"
             style="
@@ -69,7 +71,7 @@
             >upload</span
           >
           <div>Upload a tree</div>
-        </a>
+        </a> -->
         <a href="#" id="checkRelationshipBtn">
           <span
             class="material-icons"
@@ -94,7 +96,7 @@
             "
             >settings</span
           >
-          <div>Interface settings</div>
+          <div>Options</div>
         </a>
         <a href="#" id="captureTreeBtn">
           <span
@@ -107,7 +109,7 @@
             "
             >photo_camera</span
           >
-          <div>Capture the family tree</div>
+          <div>Download PNG</div>
         </a>
         <a href="#" onclick="goToPage('main')">
           <span
@@ -126,22 +128,11 @@
       </nav>
       <div id="overlay" class="overlay" onclick="closePopup()"></div>
       <!--Popup png.html for downloading PNG image-->
-      <div class="download-popup" id="download-popup">
-        <iframe src="" id="popupIframe"></iframe>
-        <button
-          id="closeCapturePopup"
-          style="position: absolute; top: 82.5%; right: 57%"
-        >
-          Exit<i class="ri-arrow-right-line"></i>
-        </button>
-      </div>
       <!-- Popup: Make a new tree -->
       <div id="newTreePopup" class="popup" style="display: none">
         <h3>Create a New Family Tree</h3>
         <label for="name">Full Name:</label>
         <input type="text" id="name" placeholder="Enter name" /><br /><br />
-        <label for="age">Age:</label>
-        <input type="number" id="age" placeholder="Enter age" /><br /><br />
         <label for="birthDate">Birth Date:</label>
         <input type="date" id="birthDate" />
         <label for="gender">Gender:</label>
@@ -173,6 +164,16 @@
         <div class="menu-widgets-buttons">
           <button id="cancelCheckRelationshipBtn">Cancel</button>
           <button id="checkRelationshipBtnPopup">Check</button>
+        </div>
+      </div>
+      <!-- Relationship Result Dialog -->
+      <div id="relationshipResultDialog" class="dialog hidden">
+        <div class="dialog-content">
+          <h2>Relationship Result</h2>
+          <div id="relationshipResult" class="relationship-result"></div>
+          <div class="dialog-actions">
+            <button id="relationshipResultOkBtn" class="create-btn">Okay</button>
+          </div>
         </div>
       </div>
 
@@ -277,6 +278,22 @@
           >
         </button>
       </div>
+      <!-- Hộp thoại tìm kiếm -->
+      <div id="searchDialog" class="dialog hidden">
+        <div class="dialog-content">
+          <h2>Search Member</h2>
+          <form id="searchForm">
+            <div class="section">
+              <label for="searchName">Name:</label>
+              <input type="text" id="searchName" name="searchName" required placeholder="Enter name to search...">
+            </div>
+            <div class="dialog-actions">
+              <button type="button" id="searchCancelButton" class="cancel-btn" style="background: #dc3545;">Cancel</button>
+              <button type="submit" class="create-btn" style="background: #28a745;">Search</button>
+            </div>
+          </form>
+        </div>
+      </div>
       <!-- Hộp thoại thêm thành viên -->
       <div id="dialog" class="dialog hidden">
         <div class="dialog-content">
@@ -294,8 +311,8 @@
                 Parent
               </label>
               <label>
-                <input type="radio" name="relationship" value="relation" />
-                Relation
+                <input type="radio" name="relationship" value="partner" />
+                Partner
               </label>
               <label>
                 <input type="radio" name="relationship" value="sibling" />
@@ -357,20 +374,15 @@
         <div class="dialog-content">
           <h2>Edit Member</h2>
           <form id="editForm">
-            <label for="editName">Full name:</label>
+            <label for="editName">Name:</label>
             <input
               type="text"
               id="editName"
-              placeholder="Enter full name"
+              placeholder="Enter name"
               required
             />
             <label for="editBirthday">Date of Birth:</label>
             <input type="date" id="editBirthday" required />
-            <label for="editGender">Gender:</label>
-            <select id="editGender">
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
             <div class="dialog-actions">
               <button type="button" id="cancelEditButton" class="cancel-btn">
                 Cancel
@@ -398,10 +410,15 @@
     </div>
     <!-- Hết -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="script/api.js"></script>
+    <script src="script/importData.js"></script>
+    <script type="module" src="script/HamburgerMenu.js"></script>
+    <script type="module" src="script/relationship.js"></script>
     <script src="script/canvas.js"></script>
     <script src="script/PageTransition.js"></script>
-    <script type="module" src="script/HamburgerMenu.js"></script>
     <script type="module" src="script/FamilyTree.js"></script>
+    <script type="module" src="script/loading.js"></script>
     <script type="module" src="script/information_panel.js"></script>
     <script type="module" src="script/utils.js"></script>
   </body>
