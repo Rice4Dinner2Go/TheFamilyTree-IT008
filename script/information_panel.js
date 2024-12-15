@@ -81,6 +81,9 @@ document
       clearCache();
       await drawFamilyTree();
       
+      // Update search data after new person is added
+      await initializePersonsData();
+      
       alert("Thành viên đã được thêm thành công!");
     } catch (error) {
       console.error("Error adding new member:", error);
@@ -107,6 +110,92 @@ const confirmDeleteButton = document.getElementById("confirmDeleteButton");
 const searchForm = document.getElementById("searchForm");
 const searchCancelButton = document.getElementById("searchCancelButton");
 const searchButton = document.getElementById("searchButton");
+const searchNameInput = document.getElementById("searchName");
+const searchSuggestions = document.createElement("div");
+searchSuggestions.className = "search-suggestions";
+searchNameInput.parentNode.insertBefore(searchSuggestions, searchNameInput.nextSibling);
+
+let allPersons = new Map(); // Store all persons for search
+
+// Initialize persons data
+async function initializePersonsData() {
+  try {
+    const persons = await api.getAllPersons();
+    allPersons.clear();
+    persons.forEach(person => {
+      allPersons.set(person.id, person);
+    });
+  } catch (error) {
+    console.error('Error initializing persons data:', error);
+  }
+}
+
+// Initialize on load
+initializePersonsData();
+
+// Search button click handler
+searchButton.addEventListener("click", () => {
+  searchNameInput.value = ""; // Clear the input
+  searchSuggestions.style.display = "none"; // Hide suggestions
+  searchDialog.classList.remove("hidden");
+});
+
+// Search input handler with suggestions
+searchNameInput.addEventListener("input", async () => {
+  const searchText = searchNameInput.value.toLowerCase();
+  searchSuggestions.innerHTML = "";
+  
+  if (searchText.length < 1) {
+    searchSuggestions.style.display = "none";
+    return;
+  }
+
+  const matches = Array.from(allPersons.values())
+    .filter(person => person.name.toLowerCase().includes(searchText))
+    .slice(0, 5); // Limit to 5 suggestions
+
+  if (matches.length > 0) {
+    matches.forEach(person => {
+      const div = document.createElement("div");
+      div.className = "suggestion-item";
+      div.textContent = `${person.name} (${person.age} years old)`;
+      div.addEventListener("click", () => {
+        searchNameInput.value = person.name;
+        handlePersonClick(person.id); // Set as root and redraw
+        searchDialog.classList.add("hidden");
+        searchSuggestions.style.display = "none";
+      });
+      searchSuggestions.appendChild(div);
+    });
+    searchSuggestions.style.display = "block";
+  } else {
+    searchSuggestions.style.display = "none";
+  }
+});
+
+// Hide suggestions when clicking outside
+document.addEventListener("click", (e) => {
+  if (!searchNameInput.contains(e.target) && !searchSuggestions.contains(e.target)) {
+    searchSuggestions.style.display = "none";
+  }
+});
+
+// Search form submit handler
+searchForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const searchText = searchNameInput.value.toLowerCase();
+  
+  const match = Array.from(allPersons.values())
+    .find(person => person.name.toLowerCase() === searchText);
+    
+  if (match) {
+    handlePersonClick(match.id); // Set as root and redraw
+    searchDialog.classList.add("hidden");
+    searchSuggestions.style.display = "none";
+  } else {
+    alert("No exact match found. Please select from suggestions or try a different name.");
+  }
+});
 
 // Mở hộp thoại sửa
 editButton.addEventListener("click", async () => {
@@ -182,6 +271,9 @@ confirmDeleteButton.addEventListener("click", async () => {
     // Delete the person first
     await deletePerson(rootId);
     
+    // Update search data after person is deleted
+    await initializePersonsData();
+    
     // Clear the cache to force reload of data
     clearCache();
     
@@ -199,19 +291,8 @@ confirmDeleteButton.addEventListener("click", async () => {
 });
 
 // Search functionality
-searchForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const searchName = document.getElementById("searchName").value;
-  // Add search logic here
-  searchDialog.classList.add("hidden");
-});
-
 searchCancelButton.addEventListener("click", () => {
   searchDialog.classList.add("hidden");
-});
-
-searchButton.addEventListener("click", () => {
-  searchDialog.classList.remove("hidden");
 });
 
 // Xử lý form sửa
@@ -244,6 +325,9 @@ editForm.addEventListener("submit", async (e) => {
       // Clear cache and redraw tree to show updated info
       clearCache();
       await drawFamilyTree();
+      
+      // Update search data after person is updated
+      await initializePersonsData();
       
       // Close the dialog
       editDialog.classList.add("hidden");
