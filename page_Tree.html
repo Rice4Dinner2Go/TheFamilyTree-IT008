@@ -278,6 +278,22 @@
           >
         </button>
       </div>
+      <!-- Hộp thoại tìm kiếm -->
+      <div id="searchDialog" class="dialog hidden">
+        <div class="dialog-content">
+          <h2>Search Member</h2>
+          <form id="searchForm">
+            <div class="section">
+              <label for="searchName">Name:</label>
+              <input type="text" id="searchName" name="searchName" required placeholder="Enter name to search...">
+            </div>
+            <div class="dialog-actions">
+              <button type="button" id="searchCancelButton" class="cancel-btn" style="background: #dc3545;">Cancel</button>
+              <button type="submit" class="create-btn" style="background: #28a745;">Search</button>
+            </div>
+          </form>
+        </div>
+      </div>
       <!-- Hộp thoại thêm thành viên -->
       <div id="dialog" class="dialog hidden">
         <div class="dialog-content">

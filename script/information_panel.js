@@ -93,6 +93,7 @@ document
 // Các hộp thoại
 const editDialog = document.getElementById("editDialog");
 const deleteDialog = document.getElementById("deleteDialog");
+const searchDialog = document.getElementById("searchDialog");
 
 // Các nút trong hộp thoại sửa
 const cancelEditButton = document.getElementById("cancelEditButton");
@@ -101,6 +102,11 @@ const editForm = document.getElementById("editForm");
 // Các nút trong hộp thoại xóa
 const cancelDeleteButton = document.getElementById("cancelDeleteButton");
 const confirmDeleteButton = document.getElementById("confirmDeleteButton");
+
+// Search form elements
+const searchForm = document.getElementById("searchForm");
+const searchCancelButton = document.getElementById("searchCancelButton");
+const searchButton = document.getElementById("searchButton");
 
 // Mở hộp thoại sửa
 editButton.addEventListener("click", async () => {
@@ -190,6 +196,22 @@ confirmDeleteButton.addEventListener("click", async () => {
     alert("An error occurred while deleting the person!");
     deleteDialog.classList.add("hidden");
   }
+});
+
+// Search functionality
+searchForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const searchName = document.getElementById("searchName").value;
+  // Add search logic here
+  searchDialog.classList.add("hidden");
+});
+
+searchCancelButton.addEventListener("click", () => {
+  searchDialog.classList.add("hidden");
+});
+
+searchButton.addEventListener("click", () => {
+  searchDialog.classList.remove("hidden");
 });
 
 // Xử lý form sửa
