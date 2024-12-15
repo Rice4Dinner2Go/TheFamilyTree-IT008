@@ -103,8 +103,25 @@ const cancelDeleteButton = document.getElementById("cancelDeleteButton");
 const confirmDeleteButton = document.getElementById("confirmDeleteButton");
 
 // Mở hộp thoại sửa
-editButton.addEventListener("click", () => {
-  editDialog.classList.remove("hidden");
+editButton.addEventListener("click", async () => {
+  try {
+    // Get current root person's data
+    const person = await api.getPersonById(rootId);
+    if (!person) {
+      alert("Person not found!");
+      return;
+    }
+
+    // Populate form with current data
+    document.getElementById("editName").value = person.name || "";
+    document.getElementById("editBirthday").value = person.dateOfBirth || "";
+
+    // Show the dialog
+    editDialog.classList.remove("hidden");
+  } catch (error) {
+    console.error("Error loading person data:", error);
+    alert("Error loading person data for editing!");
+  }
 });
 
 // Đóng hộp thoại sửa
@@ -176,15 +193,43 @@ confirmDeleteButton.addEventListener("click", async () => {
 });
 
 // Xử lý form sửa
-editForm.addEventListener("submit", (e) => {
+editForm.addEventListener("submit", async (e) => {
   e.preventDefault(); // Ngừng gửi form
-  const name = document.getElementById("editName").value;
-  const birthday = document.getElementById("editBirthday").value;
-  const gender = document.getElementById("editGender").value;
-
-  // Thực hiện lưu thông tin sửa ở đây
-  console.log("Edited Info:", { name, birthday, gender });
-
-  // Đóng hộp thoại
-  editDialog.classList.add("hidden");
+  
+  return withLoading(async () => {
+    try {
+      const name = document.getElementById("editName").value;
+      const dateOfBirth = document.getElementById("editBirthday").value;
+      
+      // Get current person data
+      const person = await api.getPersonById(rootId);
+      if (!person) {
+        throw new Error("Person not found");
+      }
+      
+      // Calculate new age
+      const birthYear = parseInt(dateOfBirth.split('-')[0]);
+      const age = 2024 - birthYear;
+      
+      // Update person with new data while preserving other fields
+      await api.updatePerson(rootId, {
+        ...person,
+        name: name,
+        dateOfBirth: dateOfBirth,
+        age: age
+      });
+      
+      // Clear cache and redraw tree to show updated info
+      clearCache();
+      await drawFamilyTree();
+      
+      // Close the dialog
+      editDialog.classList.add("hidden");
+      
+    } catch (error) {
+      console.error("Error updating person:", error);
+      alert("An error occurred while updating the person's information!");
+      editDialog.classList.add("hidden");
+    }
+  }, 'Updating person information...');
 });

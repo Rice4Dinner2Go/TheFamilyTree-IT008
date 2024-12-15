@@ -215,7 +215,7 @@ async function addSibling(personId, siblingId) {
 
         // Add each parent to the sibling
         for (const parent of parents) {
-            await addParent(siblingId, parent.id);
+            await api.addChild(parent.id, siblingId);
             console.log(`Added parent ${parent.name} to sibling ${sibling.name}`);
         }
 
