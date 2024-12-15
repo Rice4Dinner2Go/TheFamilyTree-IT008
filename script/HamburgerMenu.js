@@ -85,9 +85,9 @@ function initializeMenu() {
   }
 }
 
-import { checkRelationship, initializePersonCache } from './relationship.js';
 import api from './api.js';
-
+import { checkRelationship, initializePersonCache } from './relationship.js';
+import { deleteAllData } from './utils.js';
 let allPersons = new Map();
 
 // Initialize persons data
@@ -108,6 +108,78 @@ document.addEventListener("DOMContentLoaded", async () => {
   initializeMenu();
   await initializePersonsData();
   
+  // Make new tree functionality
+  const newTreeBtn = document.getElementById("newTreeBtn");
+  const createTreeBtn = document.getElementById("createTreeBtn");
+  const cancelNewTreeBtn = document.getElementById("cancelNewTreeBtn");
+  
+  newTreeBtn.addEventListener("click", () => {
+    document.getElementById("newTreePopup").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+    // Clear the form
+    document.getElementById("name").value = "";
+    document.getElementById("birthDate").value = "";
+    document.getElementById("gender").value = "male";
+  });
+
+  cancelNewTreeBtn.addEventListener("click", () => {
+    document.getElementById("newTreePopup").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+  });
+
+  createTreeBtn.addEventListener("click", async () => {
+    const name = document.getElementById("name").value;
+    const birthDate = document.getElementById("birthDate").value;
+    const gender = document.getElementById("gender").value;
+
+    if (!name || !birthDate) {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    try {
+      // Clear existing data
+      await localStorage.clear();
+      await deleteAllData();
+      
+      // Calculate age from birth date
+      const today = new Date();
+      const birthDateObj = new Date(birthDate);
+      const age = today.getFullYear() - birthDateObj.getFullYear();
+      
+      // Create new person with API structure
+      const newPerson = {
+        name: name,
+        gender: gender.charAt(0).toUpperCase() + gender.slice(1),  // Capitalize first letter
+        dateOfBirth: birthDate,
+        age: age,
+        partnerId: "",
+        parentIds: [],
+        childrenIds: []
+      };
+
+      // Create person via API
+      const createdPerson = await api.createPerson(newPerson);
+      
+      if (createdPerson) {
+        // Save to localStorage
+        localStorage.setItem("currentPerson", JSON.stringify(createdPerson));
+        
+        // Close the popup
+        document.getElementById("newTreePopup").style.display = "none";
+        document.getElementById("overlay").style.display = "none";
+        
+        // Force reload the page
+        window.location.replace(window.location.pathname);
+      } else {
+        throw new Error("Failed to create person");
+      }
+    } catch (error) {
+      console.error("Error creating new tree:", error);
+      alert("Error creating new tree. Please try again.");
+    }
+  });
+
   // Setup relationship checking
   const person1Input = document.getElementById("person1");
   const person2Input = document.getElementById("person2");
