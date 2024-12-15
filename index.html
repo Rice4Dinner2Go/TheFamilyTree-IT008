@@ -12,6 +12,7 @@
     <div class="container">
         <h1>Family Tree</h1>
         <div class="button-container">
+            <button class="menu-button " id="continueButton"  style="display: none;"  onclick="goToPage('tree')">Continue</button>
             <button class="menu-button start-button" onclick="showNewTreeForm()">Make a new Tree</button>
             <button class="menu-button" onclick="showImportForm()">Import a Tree</button>
         </div>
@@ -62,6 +63,8 @@
     <script src="script/PageTransition.js"></script>
     <script src="script/PopupForm.js"></script>
     <script src="script/importData.js"></script>
+    <script src="script/utils.js"></script>
+    <script src="script/continue.js"></script>
     <script>
         document.getElementById('newTreeForm').addEventListener('submit', function(e) {
             e.preventDefault();
