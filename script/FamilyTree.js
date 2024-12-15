@@ -252,7 +252,7 @@ function updateInfoPanel(person) {
     document.getElementById('info-name').textContent = person.name;
     document.getElementById('info-age').textContent = person.age;
     document.getElementById('info-birthday').textContent = person.dateOfBirth || "Unknown";
-    document.getElementById('info-gender').textContent = person.gender === "Male" ? "Male" : "Female";
+    document.getElementById('info-gender').textContent = (person.gender === "Male" || person.gender === "male") ? "Male" : "Female";
 }
 
 // Hàm để xử lý khi người dùng click vào một cá nhân
