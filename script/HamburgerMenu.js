@@ -112,6 +112,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const person1Input = document.getElementById("person1");
   const person2Input = document.getElementById("person2");
   const checkRelationshipBtn = document.getElementById("checkRelationshipBtnPopup");
+  const relationshipDialog = document.getElementById("relationshipResultDialog");
+  const relationshipResult = document.getElementById("relationshipResult");
+  const relationshipResultOkBtn = document.getElementById("relationshipResultOkBtn");
   const person1Suggestions = document.createElement("div");
   const person2Suggestions = document.createElement("div");
   
@@ -182,20 +185,39 @@ document.addEventListener("DOMContentLoaded", async () => {
     person2Suggestions.style.display = "none";
   });
 
+  // Handle relationship result dialog close
+  relationshipResultOkBtn.addEventListener("click", () => {
+    relationshipDialog.classList.add("hidden");
+    document.getElementById("checkRelationshipPopup").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+  });
+
   // Check relationship button handler
   checkRelationshipBtn.addEventListener("click", async () => {
     if (!selectedPerson1Id || !selectedPerson2Id) {
-      alert("Please select both persons from the suggestions");
+      relationshipResult.textContent = "Please select both persons from the suggestions";
+      relationshipDialog.classList.remove("hidden");
+      // Close the form even on validation error
+      document.getElementById("checkRelationshipPopup").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
       return;
     }
 
     try {
       await initializePersonCache(); // Ensure cache is up to date
       const relationship = await checkRelationship(selectedPerson1Id, selectedPerson2Id);
-      alert(relationship);
+      relationshipResult.textContent = relationship;
+      relationshipDialog.classList.remove("hidden");
+      // Close the relationship check form
+      document.getElementById("checkRelationshipPopup").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
     } catch (error) {
       console.error("Error checking relationship:", error);
-      alert("Error checking relationship. Please try again.");
+      relationshipResult.textContent = "Error checking relationship. Please try again.";
+      relationshipDialog.classList.remove("hidden");
+      // Close the form even on error
+      document.getElementById("checkRelationshipPopup").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
     }
   });
 });

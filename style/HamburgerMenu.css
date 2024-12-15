@@ -259,3 +259,14 @@
 .suggestion-item:hover {
   background-color: #f0f0f0;
 }
+
+/* Relationship Result Dialog */
+.relationship-result {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  font-size: 1.1em;
+  text-align: center;
+  color: #2c3e50;
+}
