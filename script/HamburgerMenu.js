@@ -69,14 +69,28 @@ function initializeMenu() {
   const closeCaptureBtn = document.getElementById("closeCapturePopup");
   
   if (captureTreeBtn) {
-    captureTreeBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      // Set iframe source to png.html
-      const iframe = document.getElementById("popupIframe");
-      iframe.src = "./png.html";
-      // Show popup and overlay
-      document.getElementById("download-popup").style.display = "block";
-      document.getElementById("overlay").style.display = "block";
+    captureTreeBtn.addEventListener("click", async () => {
+      try {
+        const treeElement = document.getElementById("familyTree");
+        
+        // Use html2canvas to capture the tree
+        const canvas = await html2canvas(treeElement, {
+          backgroundColor: null,
+          scale: 2, // Higher quality
+          useCORS: true,
+          allowTaint: true
+        });
+        
+        // Convert to PNG and download
+        const dataUrl = canvas.toDataURL("image/png");
+        const link = document.createElement("a");
+        link.download = "family-tree.png";
+        link.href = dataUrl;
+        link.click();
+      } catch (error) {
+        console.error("Error capturing tree:", error);
+        alert("Error capturing family tree. Please try again.");
+      }
     });
   }
 

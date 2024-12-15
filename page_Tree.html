@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="style/InformationPanel.css" />
     <link rel="stylesheet" href="style/loading.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="script/api.js"></script>
     <script src="script/importData.js"></script>
   </head>
@@ -127,15 +128,6 @@
       </nav>
       <div id="overlay" class="overlay" onclick="closePopup()"></div>
       <!--Popup png.html for downloading PNG image-->
-      <div class="download-popup" id="download-popup">
-        <iframe src="" id="popupIframe"></iframe>
-        <button
-          id="closeCapturePopup"
-          style="position: absolute; top: 82.5%; right: 57%"
-        >
-          Exit<i class="ri-arrow-right-line"></i>
-        </button>
-      </div>
       <!-- Popup: Make a new tree -->
       <div id="newTreePopup" class="popup" style="display: none">
         <h3>Create a New Family Tree</h3>
@@ -418,6 +410,7 @@
     </div>
     <!-- Hết -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="script/api.js"></script>
     <script src="script/importData.js"></script>
     <script type="module" src="script/HamburgerMenu.js"></script>
